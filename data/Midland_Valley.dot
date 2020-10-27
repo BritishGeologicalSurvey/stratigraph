@@ -1,0 +1,71 @@
+digraph shells {
+	size="7,8";
+	node [fontsize=24, shape = plaintext];
+
+"Famennian Age"	->	"Frasnian Age";
+"Courceyan Substage"	->	"Famennian Age";
+"Chadian Substage"	->	"Courceyan Substage";
+"Arundian Substage"	->	"Chadian Substage";
+"Holkerian Substage"	->	"Arundian Substage";
+"Asbian Substage"	->	"Holkerian Substage";
+"Brigantian Substage"	->	"Asbian Substage";
+"Pendleian Substage"	->	"Brigantian Substage";
+"Arnsbergian Substage"	->	"Pendleian Substage";
+"Chokierian Substage"	->	"Arnsbergian Substage";
+"Kinderscoutian Substage"	->	"Chokierian Substage";
+"Marsdenian Substage"	->	"Kinderscoutian Substage";
+"Yeadonian Substage"	->	"Marsdenian Substage";
+"Langsettian Substage"	->	"Yeadonian Substage";
+"Duckmantian Substage"	->	"Langsettian Substage";
+"Bolsovian Substage"	->	"Duckmantian Substage";
+"Asturian Substage"	->	"Bolsovian Substage";
+
+node [fontsize=20, shape = box];
+	{ rank=same; "Frasnian Age" "Kinnesswood Formation" ; }					
+	{ rank=same; "Courceyan Substage" "Ballagan Formation" ; }					
+	{ rank=same; "Chadian Substage"	"Aberlady Formation" "Clyde Plateau Volcanic Formation"	"Clyde Sandstone Formation" "Fife Ness Formation" "Gullane Formation" "Garleton Hills Volcanic Formation" "Laggan Cottage Mudstone Formation";}
+	{ rank=same; "Asbian Substage" "Anstruther Formation" "Arthur's Seat Volcanic Formation" "Bathgate Hills Volcanic Formation" "Kirkwood Formation" "Pittenweem Formation" "Sandy Craig Formation" "West Lothian Oil-Shale Formation";}
+	{ rank=same; "Brigantian Substage" "Lawmuir Formation" "Pathhead Formation" "Lower Limestone Formation";}
+	{ rank=same; "Pendleian Substage" "Limestone Coal Formation" "Upper Limestone Formation";}
+	{ rank=same; "Arnsbergian Substage" "Passage Formation";}
+	{ rank=same; "Langsettian Substage" "Scottish Lower Coal Measures Formation" ;}
+	{ rank=same; "Duckmantian Substage" "Scottish Middle Coal Measures Formation" ;}	
+	{ rank=same; "Bolsovian Substage" "Scottish Upper Coal Measures Formation" ;}	
+	
+
+"Clyde Plateau Volcanic Formation" -> "Kinnesswood Formation";
+"Lower Limestone Formation" -> "Clyde Plateau Volcanic Formation";
+"Limestone Coal Formation" -> "Lower Limestone Formation";
+"Upper Limestone Formation" -> "Limestone Coal Formation";
+"Passage Formation"  ->	"Upper Limestone Formation";
+"Scottish Lower Coal Measures Formation" -> "Passage Formation";
+"Scottish Middle Coal Measures Formation" -> "Scottish Lower Coal Measures Formation";
+"Scottish Upper Coal Measures Formation" -> "Scottish Middle Coal Measures Formation";
+"Ballagan Formation" ->	"Kinnesswood Formation";
+"Clyde Sandstone Formation" -> "Ballagan Formation";
+"Laggan Cottage Mudstone Formation" -> "Clyde Sandstone Formation";
+"Clyde Plateau Volcanic Formation" -> "Laggan Cottage Mudstone Formation";
+"Lawmuir Formation" -> "Clyde Plateau Volcanic Formation" ;
+"Lawmuir Formation" ->	"Ballagan Formation";
+"Limestone Coal Formation" -> "Lawmuir Formation";
+"Clyde Plateau Volcanic Formation" -> "Clyde Sandstone Formation";
+"Kirkwood Formation" ->	"Clyde Plateau Volcanic Formation";
+"Lawmuir Formation" -> "Kirkwood Formation";
+"Arthur's Seat Volcanic Formation" -> "Clyde Sandstone Formation";
+"Gullane Formation" -> "Arthur's Seat Volcanic Formation";
+"West Lothian Oil-Shale Formation" ->	"Gullane Formation";
+"Lower Limestone Formation" -> "West Lothian Oil-Shale Formation";
+"Bathgate Hills Volcanic Formation" ->	"Gullane Formation";
+"Limestone Coal Formation" -> "Bathgate Hills Volcanic Formation";
+"Fife Ness Formation" -> "Clyde Sandstone Formation";
+"Anstruther Formation" -> "Fife Ness Formation";
+"Pittenweem Formation"	-> "Anstruther Formation";
+"Sandy Craig Formation"	-> "Pittenweem Formation";
+"Pathhead Formation" -> "Sandy Craig Formation";
+"Lower Limestone Formation" -> "Pathhead Formation";
+"Garleton Hills Volcanic Formation" ->	"Ballagan Formation";
+"Gullane Formation" ->	"Garleton Hills Volcanic Formation";
+"Aberlady Formation" -> "Gullane Formation";
+"Lower Limestone Formation" -> "Aberlady Formation";
+
+}
