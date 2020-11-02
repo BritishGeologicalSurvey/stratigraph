@@ -1,0 +1,17 @@
+name: Run tests
+on: push
+
+jobs:
+  test:
+    # Containers must run in Linux based operating systems
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: run the tests
+        run: |
+          pip3 install -r requirements.txt
+          pip3 install pytest
+          export PYTHONPATH=.:..
+          python3 -m pytest -vs
