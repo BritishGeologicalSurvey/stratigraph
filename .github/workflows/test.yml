@@ -12,7 +12,7 @@ jobs:
         image: docker.pkg.github.com/britishgeologicalsurvey/geo-ner-model/corenlp:v0.3
         credentials:
           username: ${{ github.repository_owner }}
-          password: ${{ github.GITHUB_TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
         ports:
           - 9000:9000
 
