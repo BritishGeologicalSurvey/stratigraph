@@ -1,0 +1,4 @@
+python-Levenshtein
+rdflib
+terminusdb-client
+SPARQLWrapper
