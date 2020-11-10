@@ -3,6 +3,8 @@ It runs slowly because it has to load all the names
 from a SPARQL query (within stratigraph.similar)
 """
 import pandas as pd
+import networkx as nx
+from networkx.drawing.nx_pydot import write_dot
 from rdflib import Graph, Namespace, URIRef
 from SPARQLWrapper import SPARQLWrapper, JSON
 from stratigraph.corenlp import entities
@@ -13,15 +15,18 @@ LEX = Namespace('http://data.bgs.ac.uk/ref/Lexicon/Extended/')
 
 QUERY = """
 PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
-SELECT ?upper ?lower
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?upper ?lower ?label
 WHERE {{
    <{0}> lex:hasUpperBoundaryDefinition ?upper .
-   <{0}> lex:hasLowerBoundaryDefinition ?lower }}
+   <{0}> lex:hasLowerBoundaryDefinition ?lower .
+   <{0}> rdfs:label ?label }}
 """
 ENDPOINT = 'https://data.bgs.ac.uk/vocprez/endpoint'
 
 SIMILARITY = Similar()
 G = Graph()
+GDOT = nx.Graph()
 
 
 def bounds_texts(url):
@@ -36,17 +41,19 @@ def bounds_links(url, results):
     """Accepts a source URL and its upper/lower
     boundary descriptions"""
     links = []
+
     for item in results:
+        label = item['label']['value']
         links = link_entities(item['upper']['value'])
-        triples(url, links)
+        triples(url, label, links)
         links = link_entities(item['lower']['value'])
-        triples(url, links, relation='lower')
+        triples(url, label, links, relation='lower')
     return links
 
 
-def triples(source, entities, relation='upper'):
+def triples(source, label, entities, relation='upper'):
     """
-    Accepts a source URL
+    Accepts a source URL, and URL label,
     And a list of lists which are extracted entities
     (The lists ought be dicts for readability)
     [stemmed_name, name, linked_data_url]
@@ -55,8 +62,17 @@ def triples(source, entities, relation='upper'):
     for entity in entities:
         # Some won't link. We should log this
         if not entity: continue
+
+        # Add to the RDF graph of triples
         G.add([URIRef(source), LEX[relation], URIRef(entity[2])])
 
+        # Add to the networkX graph of nodes - duplicates ok?
+        GDOT.add_node(entity[1])
+        GDOT.add_node(label)
+        if relation == 'upper':
+            GDOT.add_edge(entity[1], label)
+        elif relation == 'lower':
+            GDOT.add_edge(label, entity[1])
 
 def link_entities(text):
     links = []
@@ -74,4 +90,7 @@ if __name__ == '__main__':
     links = list(formations['URL'])
     for url in links:
         bounds_links(url, bounds_texts(url))
-    print(G.serialize(format='turtle'))
+    with open('./data/jurassic_tm.ttl', 'wb') as ttl_out:
+        ttl_out.write(G.serialize(format='turtle'))
+
+    write_dot(GDOT, './data/jurassic_tm.dot')

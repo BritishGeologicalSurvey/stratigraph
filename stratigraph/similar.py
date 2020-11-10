@@ -101,6 +101,11 @@ class Similar:
         """Returns normalised levenshtein similarity between terms
         Uses the workings here:
         info.debatty.java.stringsimilarity.NormalizedLevenshtein"""
+        ## TODO some terms come back as None.
+        ## Are URLs missing rdfs labels, or NER extracted all stopwords?
+        ## Needs investigation
+        if not term1 or not term2:
+            return 0
         return 1.0 - distance(term1, term2) / max(len(term1), len(term2))
 
     def most_similar(self, term, cut=EDIT_DIST_CUT):
