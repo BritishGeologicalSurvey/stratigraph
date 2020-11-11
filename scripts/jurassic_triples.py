@@ -3,9 +3,9 @@ It runs slowly because it has to load all the names
 from a SPARQL query (within stratigraph.similar)
 """
 import logging
+import urllib
+
 import pandas as pd
-import networkx as nx
-from networkx.drawing.nx_pydot import write_dot
 from rdflib import Graph, Namespace, URIRef, Literal
 from rdflib.namespace import RDFS
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -30,7 +30,6 @@ ENDPOINT = 'https://data.bgs.ac.uk/vocprez/endpoint'
 
 SIMILARITY = Similar()
 G = Graph()
-GDOT = nx.DiGraph()
 
 
 def bounds_texts(url):
@@ -43,7 +42,7 @@ def bounds_texts(url):
         # might be empty
         results = results['results']['bindings']
 
-    except ConnectionResetError as err:
+    except (ConnectionResetError, urllib.error.URLError) as err:
         # TODO HTTPS connections sometimes drop - why?
         logging.error(err)
         logging.info(url)
@@ -74,21 +73,19 @@ def triples(source, label, entities, relation='upper'):
     Returns a set of ntriples
     """
     for entity in entities:
-        # Some won't link. We should log this
+        # Some won't link, either no description or no results
         if not entity:
+            logging.debug(f'no links for {source}')
+            continue
+
+        # TODO fix this further down, only return Lexicon names?
+        # Or fix this in the SPARQL query, look at the SKOS classes?
+        if 'Geochron' in entity[2]:
             continue
 
         # Add to the RDF graph of triples
         G.add([URIRef(source), LEX[relation], URIRef(entity[2])])
         G.add([URIRef(source), RDFS.label, Literal(label)])
-
-        # Add to the networkX graph of nodes - duplicates ok?
-        GDOT.add_node(entity[1])
-        GDOT.add_node(label)
-        if relation == 'upper':
-            GDOT.add_edge(entity[1], label)
-        elif relation == 'lower':
-            GDOT.add_edge(label, entity[1])
 
 
 def link_entities(text):
@@ -109,5 +106,3 @@ if __name__ == '__main__':
         bounds_links(url, bounds_texts(url))
     with open('./data/jurassic_tm.ttl', 'wb') as ttl_out:
         ttl_out.write(G.serialize(format='turtle'))
-
-    write_dot(GDOT, './data/jurassic_tm.dot')
