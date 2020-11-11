@@ -2,13 +2,17 @@
 It runs slowly because it has to load all the names
 from a SPARQL query (within stratigraph.similar)
 """
+import logging
 import pandas as pd
 import networkx as nx
 from networkx.drawing.nx_pydot import write_dot
-from rdflib import Graph, Namespace, URIRef
+from rdflib import Graph, Namespace, URIRef, Literal
+from rdflib.namespace import RDFS
 from SPARQLWrapper import SPARQLWrapper, JSON
 from stratigraph.corenlp import entities
 from stratigraph.similar import Similar
+
+logging.basicConfig(level=logging.INFO)
 
 LEX_BASEURL = 'http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/'
 LEX = Namespace('http://data.bgs.ac.uk/ref/Lexicon/Extended/')
@@ -26,15 +30,25 @@ ENDPOINT = 'https://data.bgs.ac.uk/vocprez/endpoint'
 
 SIMILARITY = Similar()
 G = Graph()
-GDOT = nx.Graph()
+GDOT = nx.DiGraph()
 
 
 def bounds_texts(url):
     sparql = SPARQLWrapper(ENDPOINT)
     sparql.setQuery(QUERY.format(url))
     sparql.setReturnFormat(JSON)
-    results = sparql.query().convert()
-    return results['results']['bindings']
+    results = {}
+    try:
+        results = sparql.query().convert()
+        # might be empty
+        results = results['results']['bindings']
+
+    except ConnectionResetError as err:
+        # TODO HTTPS connections sometimes drop - why?
+        logging.error(err)
+        logging.info(url)
+
+    return results
 
 
 def bounds_links(url, results):
@@ -61,10 +75,12 @@ def triples(source, label, entities, relation='upper'):
     """
     for entity in entities:
         # Some won't link. We should log this
-        if not entity: continue
+        if not entity:
+            continue
 
         # Add to the RDF graph of triples
         G.add([URIRef(source), LEX[relation], URIRef(entity[2])])
+        G.add([URIRef(source), RDFS.label, Literal(label)])
 
         # Add to the networkX graph of nodes - duplicates ok?
         GDOT.add_node(entity[1])
@@ -73,6 +89,7 @@ def triples(source, label, entities, relation='upper'):
             GDOT.add_edge(entity[1], label)
         elif relation == 'lower':
             GDOT.add_edge(label, entity[1])
+
 
 def link_entities(text):
     links = []
