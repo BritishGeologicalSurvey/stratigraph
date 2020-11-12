@@ -26,6 +26,12 @@ WHERE {{
    <{0}> lex:hasLowerBoundaryDefinition ?lower .
    <{0}> rdfs:label ?label }}
 """
+QUERY_LABEL = """
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?label
+WHERE {{
+   <{0}> rdfs:label ?label }}
+"""
 ENDPOINT = 'https://data.bgs.ac.uk/vocprez/endpoint'
 
 SIMILARITY = Similar()
@@ -47,6 +53,22 @@ def bounds_texts(url):
         logging.error(err)
         logging.info(url)
 
+    # First query returns upper, lower, label
+    # If it's empty, still request the label
+    if not results:
+        sparql.setQuery(QUERY_LABEL.format(url))
+        sparql.setReturnFormat(JSON)
+        try:
+            results = sparql.query().convert()
+            # if still empty, deeper things are wrong elsewhere
+            results = results['results']['bindings']
+
+        except (ConnectionResetError, urllib.error.URLError) as err:
+            # TODO HTTPS connections sometimes drop - why?
+            logging.error(err)
+            logging.info(url)
+
+
     return results
 
 
@@ -57,20 +79,24 @@ def bounds_links(url, results):
 
     for item in results:
         label = item['label']['value']
-        links = link_entities(item['upper']['value'])
-        triples(url, label, links)
-        links = link_entities(item['lower']['value'])
-        triples(url, label, links, relation='lower')
+        G.add([URIRef(url), RDFS.label, Literal(label)])
+        if 'upper' in item:
+            links = link_entities(item['upper']['value'])
+            triples(url, links)
+
+        if 'lower' in item:
+            links = link_entities(item['lower']['value'])
+            triples(url, links, relation='lower')
     return links
 
 
-def triples(source, label, entities, relation='upper'):
+def triples(source, entities, relation='upper'):
     """
-    Accepts a source URL, and URL label,
+    Accepts a source URL
     And a list of lists which are extracted entities
     (The lists ought be dicts for readability)
     [stemmed_name, name, linked_data_url]
-    Returns a set of ntriples
+    Adds the links to the rdflib.Graph
     """
     for entity in entities:
         # Some won't link, either no description or no results
@@ -85,7 +111,6 @@ def triples(source, label, entities, relation='upper'):
 
         # Add to the RDF graph of triples
         G.add([URIRef(source), LEX[relation], URIRef(entity[2])])
-        G.add([URIRef(source), RDFS.label, Literal(label)])
 
 
 def link_entities(text):

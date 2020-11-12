@@ -9,6 +9,10 @@
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BFB> rdfs:label "Broadford Beds Formation" ;
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PABS> .
 
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BLF> rdfs:label "Ballyleighery Formation" .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BLIH> rdfs:label "Blue Lias Formation (Hebrides)" .
+
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BMN> rdfs:label "Brant Mudstone Formation [Obsolete Name And Code: Use CHAM]" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GLBF>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SMD> ;
@@ -16,6 +20,12 @@
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BRAE> rdfs:label "Brae Formation" ;
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KC> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BRARE> rdfs:label "Brora Arenaceous Formation" .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BRARG> rdfs:label "Brora Argillaceous Formation" .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CHR> rdfs:label "Cross Hands Rock" .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CLR> rdfs:label "Coral Rag Formation (Southern England)" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HYB> ;
@@ -30,18 +40,21 @@
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/DNG> ;
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BRKH> .
 
-<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CYK> rdfs:label "Clynekirkton Sandstone Formation" ;
-    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BROBC>,
-        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FCYSI>,
-        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SSTV> ;
-    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HBB>,
-        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KTW> .
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CUMR> rdfs:label "Cumnor Formation [Obsolete Name And Code: Use STFD]" .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/DRB> rdfs:label "Dunrobin Bay Formation [See Also DUNR]" .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FJEV> rdfs:label "Fjerritslev Formation" ;
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CRKN> .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GLF> rdfs:label "Glentham Formation" ;
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CB> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GOF> rdfs:label "Great Oolite Formation [Obsolete: See CFDO]" .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GOL> rdfs:label "Great Oolite Limestone [Obsolete Name And Code: Use BWL, GOG or CFDO]" .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/INOW> rdfs:label "Inferior Oolite Formation (Wessex)[Obsolete Name And Code Use: INO]" .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LCG> rdfs:label "Lower Calcareous Grit Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/WEY> ;
@@ -56,6 +69,8 @@
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BOCO>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ORRN> .
 
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LINO> rdfs:label "Lower Inferior Oolite [Obsolete Name And Code: See BLPL]" .
+
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LL> rdfs:label "Lincolnshire Limestone Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GRF>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H2904> ;
@@ -66,6 +81,8 @@
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BLI>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/RLS> ;
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H3380> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/MINO> rdfs:label "Middle Inferior Oolite [Obsolete Name And Code: Use ASLS]" .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/MRB> rdfs:label "Marlstone Rock Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CHAM>,
@@ -80,6 +97,8 @@
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HYSA>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/RLD>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/STAM> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/NTH> rdfs:label "Nothe Formation [Obsolete Name And Code: Use RECF]" .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/OSS> rdfs:label "Osmington Oolite Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BFG>,
@@ -106,6 +125,8 @@
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H1114>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/WHS> .
 
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PLS> rdfs:label "Portland Sand Formation [Obsolete Code: Use POSA]" .
+
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/POSA> rdfs:label "Portland Sand Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KC> ;
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H1114>,
@@ -114,9 +135,17 @@
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/POCL>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/POST> .
 
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/RONA> rdfs:label "Rona Formation [Jurassic]" .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SNL> rdfs:label "Snitterby Limestone Formation [Obsolete Name And Code: Use BWL]" .
+
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SPEK> rdfs:label "Speke Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CORM> ;
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FLDN> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/STSK> rdfs:label "Stack Skerry Formation" .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SUSK> rdfs:label "Sule Skerry Formation" .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SYS> rdfs:label "Spilsby Sandstone Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H3812>,
@@ -132,6 +161,8 @@
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/AOL>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CFDO> .
 
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TT> rdfs:label "Througham Tilestone Formation" .
+
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/UCG> rdfs:label "Upper Calcareous Grit Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/COO>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LNGC>,
@@ -140,6 +171,10 @@
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/AMC>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LNGC>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/NGRC> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/UINO> rdfs:label "Upper Inferior Oolite [Obsolete Name And Code: Use SALS]" .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ULC> rdfs:label "Upper Lias Clay Formation [Obsolete Name And Code: Use WHM]" .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ADS> rdfs:label "Ardnish Formation" ;
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PABS> .
@@ -150,12 +185,21 @@
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CUD>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GASH> .
 
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BRKH> rdfs:label "Breakish Formation" .
+
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BW> rdfs:label "Blea Wyke Sandstone Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/WHM> ;
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/DGR>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/RAG>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/RDLI>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/YSDT> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CYK> rdfs:label "Clynekirkton Sandstone Formation" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BROBC>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FCYSI>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SSTV> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HBB>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KTW> .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FLMR> rdfs:label "Fulmar Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FLMR>,
@@ -170,6 +214,8 @@
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GLT>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H1024>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/WHS> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HBB> rdfs:label "Helmsdale Boulder Beds Formation" .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LDN> rdfs:label "Lansdown Clay Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/AOL> ;
@@ -213,6 +259,8 @@
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HNF>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HYSA> ;
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/RLD> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/STOU> rdfs:label "Stour Formation" .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/WAR> rdfs:label "Wardour Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KC> ;
@@ -333,6 +381,8 @@
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HDST> ;
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SEEL> .
 
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/RASI> rdfs:label "Raasay Ironstone Formation" .
+
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/RMU> rdfs:label "Redcar Mudstone Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CTM>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LTK>,
@@ -352,6 +402,13 @@
     ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CMSA>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/STBA>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/UOST> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SSTV> rdfs:label "Strathsteven Mudstone Formation" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BOCO>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BRORO> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BROBC>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CYK>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FCYSI> .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/STA> rdfs:label "Staithes Sandstone Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/RMU> ;
@@ -679,18 +736,6 @@
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FE>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FMB> .
 
-<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BOCO> rdfs:label "Brora Coal Formation" ;
-    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BOCO>,
-        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/DOLL>,
-        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ORRN> ;
-    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BALR>,
-        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BETR>,
-        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BOCO>,
-        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BROR>,
-        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BRORO>,
-        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H5212>,
-        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SSTV> .
-
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CFDO> rdfs:label "Chalfield Oolite Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/AOL>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FE> ;
@@ -705,6 +750,18 @@
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FRC>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GOG>,
         <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TY> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BOCO> rdfs:label "Brora Coal Formation" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BOCO>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/DOLL>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ORRN> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BALR>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BETR>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BOCO>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BROR>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BRORO>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H5212>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SSTV> .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CB> rdfs:label "Cornbrash Formation" ;
     ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BWC>,
