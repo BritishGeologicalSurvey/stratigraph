@@ -5,7 +5,6 @@ from a SPARQL query (within stratigraph.similar)
 import logging
 import urllib
 
-import pandas as pd
 from rdflib import Graph, Namespace, URIRef, Literal
 from rdflib.namespace import RDFS
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -34,11 +33,16 @@ WHERE {{
 """
 ENDPOINT = 'https://data.bgs.ac.uk/vocprez/endpoint'
 
+# This takes too long on-the-fly each time, should cache
 SIMILARITY = Similar()
-G = Graph()
 
 
 def bounds_texts(url):
+    """
+    Accepts a linked data url
+    Query data.bgs.ac.uk for upper/lower boundary descriptions.
+    If not found, just return the text label for the link
+    """
     sparql = SPARQLWrapper(ENDPOINT)
     sparql.setQuery(QUERY.format(url))
     sparql.setReturnFormat(JSON)
@@ -68,66 +72,56 @@ def bounds_texts(url):
             logging.error(err)
             logging.info(url)
 
-
     return results
 
 
-def bounds_links(url, results):
+def bounds_links(url, results, graph=None):
     """Accepts a source URL and its upper/lower
     boundary descriptions"""
+    if not graph:
+        graph = Graph()
     links = []
 
     for item in results:
-        label = item['label']['value']
-        G.add([URIRef(url), RDFS.label, Literal(label)])
         if 'upper' in item:
             links = link_entities(item['upper']['value'])
-            triples(url, links)
+            graph = triples(url, links, graph=graph)
 
         if 'lower' in item:
             links = link_entities(item['lower']['value'])
-            triples(url, links, relation='lower')
-    return links
+            graph = triples(url, links, relation='lower', graph=graph)
+    return graph
 
 
-def triples(source, entities, relation='upper'):
+def triples(source, entities, relation='upper', graph=None):
     """
     Accepts a source URL
-    And a list of lists which are extracted entities
-    (The lists ought be dicts for readability)
-    [stemmed_name, name, linked_data_url]
+    And a list of dicts which are extracted entities
     Adds the links to the rdflib.Graph
     """
+    if not graph:
+        graph = Graph()
     for entity in entities:
         # Some won't link, either no description or no results
         if not entity:
             logging.debug(f'no links for {source}')
             continue
 
-        # TODO fix this further down, only return Lexicon names?
-        # Or fix this in the SPARQL query, look at the SKOS classes?
-        if 'Geochron' in entity[2]:
-            continue
-
         # Add to the RDF graph of triples
-        G.add([URIRef(source), LEX[relation], URIRef(entity[2])])
+        graph.add([URIRef(source), LEX[relation], URIRef(entity['url'])])
+        graph.add([URIRef(source), RDFS.label, Literal(entity['name'])])
+    return graph
 
 
 def link_entities(text):
+    """Accepts a text string.
+    Returns a list of extracted named entities which have links
+    [{'name': 'foo', 'url': 'http://foo.com'}]
+    """
     links = []
     names = entities(text)
     for name in names:
         link = SIMILARITY.most_similar(name['name'])
-        links.append(link)
+        links.append({'name': link[1],
+                      'url': link[2]})
     return links
-
-
-if __name__ == '__main__':
-    formations = pd.read_csv('./data/Jurassic_Formations.csv')
-    formations = formations[['LEX_CODE', 'UNIT_NAME']]
-    formations['URL'] = LEX_BASEURL + formations['LEX_CODE']
-    links = list(formations['URL'])
-    for url in links:
-        bounds_links(url, bounds_texts(url))
-    with open('./data/jurassic_tm.ttl', 'wb') as ttl_out:
-        ttl_out.write(G.serialize(format='turtle'))
