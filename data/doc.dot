@@ -1,0 +1,22 @@
+strict digraph  {
+"Fell Sandstone Formation";
+"Clattering Band";
+"Clyde Sandstone Formation";
+"Glencartholm Volcanic Beds";
+"Buchan Formation";
+"Pentre Chert Formation";
+"Stainmore Formation";
+"Great Limestone Member";
+"Scremerston Formation";
+"Fell Sandstone Formation" -> "Clyde Sandstone Formation";
+"Fell Sandstone Formation" -> "Glencartholm Volcanic Beds";
+"Fell Sandstone Formation" -> "Buchan Formation";
+"Clattering Band" -> "Fell Sandstone Formation";
+"Clattering Band" -> "Glencartholm Volcanic Beds";
+"Glencartholm Volcanic Beds" -> "Fell Sandstone Formation";
+"Glencartholm Volcanic Beds" -> "Clyde Sandstone Formation";
+"Pentre Chert Formation" -> "Stainmore Formation";
+"Stainmore Formation" -> "Clattering Band";
+"Great Limestone Member" -> "Stainmore Formation";
+"Scremerston Formation" -> "Fell Sandstone Formation";
+}

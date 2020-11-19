@@ -122,6 +122,9 @@ def link_entities(text):
     names = entities(text)
     for name in names:
         link = SIMILARITY.most_similar(name['name'])
+        if not link:
+            continue
+
         links.append({'name': link[1],
                       'url': link[2]})
     return links
