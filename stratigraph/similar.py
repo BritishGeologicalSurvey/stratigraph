@@ -38,10 +38,13 @@ EDIT_DIST_CUT = 0.89  # cutoff for Levenshtein similarity set by @ike
 
 ENDPOINT = "https://data.bgs.ac.uk/vocprez/endpoint"
 
+# Select all URLs and labels for things in the Lexicon concept scheme
 SPARQL_QUERY = """
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 SELECT ?url ?name
-WHERE { ?url rdfs:label ?name . }
+WHERE { ?url rdfs:label ?name .
+        ?url skos:inScheme <http://data.bgs.ac.uk/ref/Lexicon> . }
 """
 
 
