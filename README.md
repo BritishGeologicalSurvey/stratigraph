@@ -37,6 +37,7 @@ TODO - define the endpoints on the graph database that the visualisation needs t
 
 ### Visualisation
    
+[TODO agree this and refine/extend]
 
 Import dot file into visualisation, allowing multiple imports
 	(BONUS FEATURE: allow import of ttl using Loop GSO schema - or call service that can convert from Loop GSO to dot)
@@ -45,11 +46,11 @@ Toggle to hide member/bed and only view generalisation at formation level
 
 Display source of data alongside the graph, highlight the matched term in the free text (similar to the text mining work). 
 
-?Feedback mechanism for individual matches from free text
+Feedback mechanism for individual matches from free text
 
 Editing of aggregated graph data, save to new graph, include provenance of nodes and edges
 
-?Save graph as dot, csv, ttl, ttl using Loop GSO
+Save graph as dot, csv, ttl, ttl using Loop GSO
 
 
 ## Contributors
