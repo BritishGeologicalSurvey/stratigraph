@@ -42,7 +42,6 @@ def entities(document, server=SERVER):
     of all entities with offsets"""
     try:
         nlp_tokens = tokens(document, server=server)
-        print(nlp_tokens)
     except BaseException:
         raise
 

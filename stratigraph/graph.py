@@ -107,9 +107,14 @@ def triples(source, entities, relation='upper', graph=None):
             logging.debug(f'no links for {source}')
             continue
 
+        # Case where we are matching geochronological names/entities
+        # TODO switch this off elsewhere
+        if 'Geochron' in entity['url']:
+            continue
+
         # Add to the RDF graph of triples
         graph.add([URIRef(source), LEX[relation], URIRef(entity['url'])])
-        graph.add([URIRef(source), RDFS.label, Literal(entity['name'])])
+        graph.add([URIRef(entity['url']), RDFS.label, Literal(entity['name'])])
     return graph
 
 
