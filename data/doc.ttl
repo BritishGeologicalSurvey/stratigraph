@@ -1,0 +1,122 @@
+@prefix ns1: <http://data.bgs.ac.uk/ref/Lexicon/Extended/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BDR> rdfs:label "Ballagan Formation",
+        "Border Group",
+        "Clattering Band",
+        "Fell Sandstone Formation",
+        "Glencartholm Volcanic Beds",
+        "Inverclyde Group",
+        "Kirkbean Member",
+        "Lyne Formation",
+        "Tyne Limestone Formation",
+        "Yoredale Group" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BGN>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FELL>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H345>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/INV>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LYNE> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BDR>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CTB>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FELL>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H2220>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TYLS>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/YORE> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LYNE> rdfs:label "Ballagan Formation",
+        "Devonian Period",
+        "Fell Sandstone Formation" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Geochronology/Division/D>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BGN> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FELL> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/AG> rdfs:label "Great Limestone Member",
+        "Melmerby Scar Limestone Formation",
+        "Stainmore Formation" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/MEL> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GL>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SMGP> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BGN> rdfs:label "Clyde Sandstone Formation",
+        "Kinnesswood Formation" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KNW> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CYD> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BSG> rdfs:label "Alston Formation",
+        "Bowland Shale Formation",
+        "Cravenoceras leion Marine Band",
+        "Hodderense Limestone Formation",
+        "Malham Formation",
+        "Morridge Formation",
+        "Pendleside Limestone Formation",
+        "Pentre Chert Formation",
+        "Trawden Limestone Group",
+        "Widmerpool Formation",
+        "Yoredale Group" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/AG>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BOH>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BSG>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/E1A1>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/MALM>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PDL>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PECH>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TRLI>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/WDF>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/YORE> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BSG>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/MORRI> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SCF> rdfs:label "Fell Sandstone Formation",
+        "Scremerston Formation" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FELL>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SCF> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SCF> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SMGP> rdfs:label "Great Limestone Member",
+        "Stainmore Formation",
+        "Subcrenatum Marine Band" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GL>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SMGP> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SBMB> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TYLS> rdfs:label "Alston Formation",
+        "Callant Limestone",
+        "Clattering Band",
+        "Fell Sandstone Formation",
+        "Glencartholm Volcanic Member",
+        "Kingbridge Limestone" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CTB>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FELL>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GV>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KBL> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/AG>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CALS> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TYPO> rdfs:label "Buchan Formation",
+        "Cementstone Formation",
+        "Tayport Formation",
+        "Zechstein Group" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BUHN>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TYPO> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CMNT>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TYPO>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ZG> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CMNT> rdfs:label "Cementstone Formation",
+        "Fell Sandstone Formation" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CMNT> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CMNT>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FELL> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FELL> rdfs:label "Cementstone Formation",
+        "Fell Sandstone Formation",
+        "Glencartholm Volcanic Member",
+        "Kingbridge Limestone",
+        "Tyne Limestone Formation" ;
+    ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CMNT>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FELL> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FELL>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GV>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KBL>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TYLS> .
+

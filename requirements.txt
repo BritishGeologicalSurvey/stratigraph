@@ -1,4 +1,6 @@
 fastapi
+networkx
+pydot
 python-Levenshtein
 rdflib
 terminusdb-client

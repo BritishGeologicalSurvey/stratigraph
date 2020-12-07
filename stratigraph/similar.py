@@ -38,10 +38,13 @@ EDIT_DIST_CUT = 0.89  # cutoff for Levenshtein similarity set by @ike
 
 ENDPOINT = "https://data.bgs.ac.uk/vocprez/endpoint"
 
+# Select all URLs and labels for things in the Lexicon concept scheme
 SPARQL_QUERY = """
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 SELECT ?url ?name
-WHERE { ?url rdfs:label ?name . }
+WHERE { ?url rdfs:label ?name .
+        ?url skos:inScheme <http://data.bgs.ac.uk/ref/Lexicon> . }
 """
 
 
@@ -101,6 +104,11 @@ class Similar:
         """Returns normalised levenshtein similarity between terms
         Uses the workings here:
         info.debatty.java.stringsimilarity.NormalizedLevenshtein"""
+        # TODO some terms come back as None.
+        # Are URLs missing rdfs labels, or NER extracted all stopwords?
+        # Needs investigation
+        if not term1 or not term2:
+            return 0
         return 1.0 - distance(term1, term2) / max(len(term1), len(term2))
 
     def most_similar(self, term, cut=EDIT_DIST_CUT):
