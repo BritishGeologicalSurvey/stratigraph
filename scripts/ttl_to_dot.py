@@ -1,6 +1,7 @@
 """
 Script to generate dotfiles from Turtle output.
 """
+import argparse
 import logging
 import networkx as nx
 from networkx.drawing.nx_pydot import write_dot
@@ -47,5 +48,9 @@ def ttl_to_dot(ttl_file):
 
 
 if __name__ == '__main__':
-    graph = ttl_to_dot('./data/jurassic_tm.ttl')
-    write_dot(graph, './data/jurassic_tm.dot')
+    #ttl = './data/jurassic_tm.ttl'
+    #dot = './data/jurassic_tm.dot'
+    ttl = './data/doc.ttl'
+    dot = './data/doc.dot'
+    graph = ttl_to_dot(ttl)
+    write_dot(graph, dot)
