@@ -22,7 +22,7 @@ docker run -p 9000:9000 docker.pkg.github.com/britishgeologicalsurvey/geo-ner-mo
 
 Run `scripts/ttl_to_dot.py` to produce:
 
- * [Graphviz dotfile format upper/lower boundary relations in Jurassic frm ttl file](jurassic_tm.dot)
+ * [Graphviz dotfile format upper/lower boundary relations in Jurassic from ttl file](jurassic_tm.dot)
 
  
 Install and use graphviz `dot` utility using following commands
