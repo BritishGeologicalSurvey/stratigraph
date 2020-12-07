@@ -1,0 +1,21 @@
+strict digraph  {
+"Bowland Shale Formation";
+"Stainmore Formation";
+"Cementstone Formation";
+"Fell Sandstone Formation";
+"Devonian Period";
+"Kinnesswood Formation";
+"Kirkbean Member";
+"Buchan Formation";
+"Bowland Shale Formation" -> "Stainmore Formation";
+"Stainmore Formation" -> "Fell Sandstone Formation";
+"Cementstone Formation" -> "Devonian Period";
+"Cementstone Formation" -> "Kirkbean Member";
+"Cementstone Formation" -> "Buchan Formation";
+"Fell Sandstone Formation" -> "Cementstone Formation";
+"Fell Sandstone Formation" -> "Kirkbean Member";
+"Devonian Period" -> "Kinnesswood Formation";
+"Kirkbean Member" -> "Devonian Period";
+"Kirkbean Member" -> "Kinnesswood Formation";
+"Kirkbean Member" -> "Cementstone Formation";
+}
