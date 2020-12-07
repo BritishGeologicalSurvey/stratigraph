@@ -9,7 +9,7 @@ Currently uses Fuseki as a backend for SPARQL queries
 # from pydantic import BaseModel
 
 from fastapi import FastAPI, Depends, HTTPException
-from stratigraph.graph import Graph
+from stratigraph.store import GraphStore
 
 
 def load_graph():
@@ -18,7 +18,7 @@ def load_graph():
     """
     try:
         # load up a graph model here
-        graph = Graph()
+        graph = GraphStore()
     except Exception:  # handle explicit exceptions - no endpoint, etc
         raise HTTPException(status_code=404, detail="Graph not found")
     return graph

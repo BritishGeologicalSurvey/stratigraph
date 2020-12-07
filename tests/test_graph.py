@@ -1,10 +1,5 @@
 import rdflib
-from stratigraph.graph import Graph, triples, bounds_texts
-
-
-def test_graph():
-    g = Graph()
-    assert g
+from stratigraph.graph import triples, bounds_texts
 
 
 def test_triples():

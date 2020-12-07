@@ -134,9 +134,3 @@ def link_entities(text):
         links.append({'name': link[1],
                       'url': link[2]})
     return links
-
-
-class Graph():
-    """Intended as an abstraction in front of a graph store"""
-    pass
-
