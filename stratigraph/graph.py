@@ -144,11 +144,12 @@ def ttl_to_nx(graph=None, triples=None):
 
     # Empty graph object will still evaluate False.
     # If no triples to parse either, it raises ValueError
-    if len(graph) == 0:
+    if not graph:
         graph = rdflib.Graph()
         try:
             graph.parse(triples, format='turtle')
-        except (FileNotFoundError, ValueError) as err:  # may also be rdflib invalid errors:
+        # may also be rdflib parsing errors
+        except (FileNotFoundError, ValueError) as err:
             logging.error(err)
 
     gdot = nx.DiGraph()
