@@ -10,6 +10,8 @@ Could break the former out into a distinct store.py, let's see.
 import logging
 import urllib
 
+import networkx as nx
+from networkx.drawing.nx_pydot import write_dot
 import rdflib
 from rdflib import Namespace, URIRef, Literal
 from rdflib.namespace import RDFS
@@ -134,3 +136,58 @@ def link_entities(text):
         links.append({'name': link[1],
                       'url': link[2]})
     return links
+
+
+def ttl_to_nx(graph=None, triples=None):
+    """Accepts either an rdflib graph, or a file with triples in .ttl form
+    Returns a NetworkX graph based on the contents."""
+
+    # Empty graph object will still evaluate False.
+    # If no triples to parse either, it raises ValueError
+    if len(graph) == 0:
+        graph = rdflib.Graph()
+        try:
+            graph.parse(triples, format='turtle')
+        except (FileNotFoundError, ValueError) as err:  # may also be rdflib invalid errors:
+            logging.error(err)
+
+    gdot = nx.DiGraph()
+
+    # Get all URLs for Lexicon terms in our graph
+    subjects = set([url for url in graph.subjects()])
+
+    for url in subjects:
+        label = str(graph.label(url))
+        if not label:
+            continue
+
+        # Node attributes should be added when calling add_node
+        # We add the URL but later also want the node colour.
+        gdot.add_node(label, url=str(url))
+
+        uppers = [str(graph.label(t[2])) for t in graph.triples([url, LEX['upper'], None])]  # noqa: E501
+        lowers = [str(graph.label(t[2])) for t in graph.triples([url, LEX['lower'], None])]  # noqa: E501
+
+        for strat in uppers:
+            # don't add self-referential edges
+            if (strat == label) or (not strat):
+                continue
+
+            gdot.add_edge(strat, label)
+
+        for strat in lowers:
+            # avoid self-references
+            if (strat == label) or (not strat):
+                continue
+            gdot.add_edge(label, strat)
+
+    return gdot
+
+
+def graph_to_dot(graph=None, triples=None, out=None):
+    """Accepts either an rdflib graph, or a file with triples in .ttl form
+    Returns a Graphviz dotfile (rendered for us by networkx)"""
+    # Translate our RDF graph into a networkx one
+    nx_graph = ttl_to_nx(graph=graph, triples=triples)
+    # Out might be a filename or a filehandle
+    write_dot(nx_graph, out)
