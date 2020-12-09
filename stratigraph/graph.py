@@ -18,6 +18,7 @@ from rdflib.namespace import RDFS
 from SPARQLWrapper import SPARQLWrapper, JSON
 from stratigraph.corenlp import entities
 from stratigraph.similar import Similar
+from stratigraph.colours import COLOURS
 
 logging.basicConfig(level=logging.INFO)
 
@@ -163,8 +164,10 @@ def ttl_to_nx(graph=None, triples=None):
             continue
 
         # Node attributes should be added when calling add_node
-        # We add the URL but later also want the node colour.
-        gdot.add_node(label, url=str(url))
+        # We add the URL and also want the node colour.
+        # Not all Lexicon codes have DigMap colours, however - default to pale grey
+        colour = COLOURS.get(str(url), '#EEEEEE')
+        gdot.add_node(label, url=str(url), style='filled', fillcolor=colour)
 
         uppers = [str(graph.label(t[2])) for t in graph.triples([url, LEX['upper'], None])]  # noqa: E501
         lowers = [str(graph.label(t[2])) for t in graph.triples([url, LEX['lower'], None])]  # noqa: E501
