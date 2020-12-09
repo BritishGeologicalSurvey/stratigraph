@@ -1,0 +1,14 @@
+@prefix ns1: <http://data.bgs.ac.uk/ref/Lexicon/Extended/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ABI> ns1:lower <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SDT>,
+        <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SFG> ;
+    ns1:upper <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KC> .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ABI> rdfs:label "Abbotsbury Ironstone Formation" .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SDT> rdfs:label "Sandsfoot Formation" .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SFG> rdfs:label "Sandsfoot Grit Member" .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KC> rdfs:label "Kimmeridge Clay Formation" .
