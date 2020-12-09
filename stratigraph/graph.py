@@ -1,11 +1,17 @@
-"""Script showing usage of NER entity grounding
-It runs slowly because it has to load all the names
-from a SPARQL query (within stratigraph.similar)
+"""Wrapper for queries against and responses from a graph store,
+Fuseki/SPARQL for now but we could put any graph store in here,
+preserving the interface
+
+We have a generic Graph() object for use behind the API
+Also a collection of utility functions that started in a script.
+Could break the former out into a distinct store.py, let's see.
 """
+
 import logging
 import urllib
 
-from rdflib import Graph, Namespace, URIRef, Literal
+import rdflib
+from rdflib import Namespace, URIRef, Literal
 from rdflib.namespace import RDFS
 from SPARQLWrapper import SPARQLWrapper, JSON
 from stratigraph.corenlp import entities
@@ -79,7 +85,7 @@ def bounds_links(url, results, graph=None):
     """Accepts a source URL and its upper/lower
     boundary descriptions"""
     if not graph:
-        graph = Graph()
+        graph = rdflib.Graph()
     links = []
 
     for item in results:
@@ -100,7 +106,7 @@ def triples(source, entities, relation='upper', graph=None):
     Adds the links to the rdflib.Graph
     """
     if not graph:
-        graph = Graph()
+        graph = rdflib.Graph()
     for entity in entities:
         # Some won't link, either no description or no results
         if not entity:
