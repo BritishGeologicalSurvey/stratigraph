@@ -29,3 +29,4 @@ def test_era():
     name = 'Carboniferous'
     response = client.get(f"/era/{name}")
     assert response.status_code == 200
+    assert 'digraph' in str(response.content)

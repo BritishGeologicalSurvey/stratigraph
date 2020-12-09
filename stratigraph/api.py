@@ -3,13 +3,16 @@ API to provide SVG, TTL, DOT export from a graph store.
 Currently uses Fuseki as a backend for SPARQL queries
 """
 
-# If we end up with POST queries, we'll want these
+from typing import Optional
+
+# If we end up with POST queries, we'll want pydantic
 # to constrain and verify input with
-# from typing import List
 # from pydantic import BaseModel
 
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.responses import PlainTextResponse
 from stratigraph.store import GraphStore
+from stratigraph.graph import graph_to_dot
 
 
 def load_graph():
@@ -38,9 +41,15 @@ async def lex_code(code: str, graph=Depends(load_graph)):
 
 
 @app.get("/era/{name}")
-async def geo_era(name: str, graph=Depends(load_graph)):
+async def geo_era(name: str,
+                  full: bool = False,
+                  format: Optional[str] = 'dot',
+                  graph=Depends(load_graph)):
     """
     Given a Geochron term, return the graph filtered by everything
     that fits inside this geochronological era
+    Optional 'full' to show all units, defaults
+    to only show Formation unit rank.
     """
-    return {}
+    dot = graph_to_dot(graph.in_era(name))
+    return PlainTextResponse(dot)

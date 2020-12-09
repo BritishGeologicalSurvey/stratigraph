@@ -11,7 +11,7 @@ import logging
 import urllib
 
 import networkx as nx
-from networkx.drawing.nx_pydot import write_dot
+from networkx.drawing.nx_pydot import to_pydot
 import rdflib
 from rdflib import Namespace, URIRef, Literal
 from rdflib.namespace import RDFS
@@ -165,7 +165,7 @@ def ttl_to_nx(graph=None, triples=None):
 
         # Node attributes should be added when calling add_node
         # We add the URL and also want the node colour.
-        # Not all Lexicon codes have DigMap colours, however - default to pale grey
+        # Not all Lexicon codes have DigMap colours, however - default to grey
         colour = COLOURS.get(str(url), '#EEEEEE')
         gdot.add_node(label, url=str(url), style='filled', fillcolor=colour)
 
@@ -188,10 +188,10 @@ def ttl_to_nx(graph=None, triples=None):
     return gdot
 
 
-def graph_to_dot(graph=None, triples=None, out=None):
+def graph_to_dot(graph=None, triples=None):
     """Accepts either an rdflib graph, or a file with triples in .ttl form
     Returns a Graphviz dotfile (rendered for us by networkx)"""
     # Translate our RDF graph into a networkx one
     nx_graph = ttl_to_nx(graph=graph, triples=triples)
     # Out might be a filename or a filehandle
-    write_dot(nx_graph, out)
+    return to_pydot(nx_graph).to_string()
