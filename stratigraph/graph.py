@@ -18,7 +18,8 @@ from rdflib.namespace import RDFS
 from SPARQLWrapper import SPARQLWrapper, JSON
 from stratigraph.corenlp import entities
 from stratigraph.similar import Similar
-from stratigraph.colours import COLOURS
+from stratigraph.lex_digmap_colours import COLOURS as DIGMAP_COLOURS
+from stratigraph.lex_age_colours import COLOURS as AGE_COLOURS
 
 logging.basicConfig(level=logging.INFO)
 
@@ -139,8 +140,9 @@ def link_entities(text):
     return links
 
 
-def ttl_to_nx(graph=None, triples=None):
+def ttl_to_nx(graph=None, triples=None, colour_scale="digmap"):
     """Accepts either an rdflib graph, or a file with triples in .ttl form
+    Accepts either digmap or age for colour scale used for the graph
     Returns a NetworkX graph based on the contents."""
 
     # Empty graph object will still evaluate False.
@@ -166,7 +168,10 @@ def ttl_to_nx(graph=None, triples=None):
         # Node attributes should be added when calling add_node
         # We add the URL and also want the node colour.
         # Not all Lexicon codes have DigMap colours, however - default to pale grey
-        colour = COLOURS.get(str(url), '#EEEEEE')
+        if colour_scale == "age":
+            colour = AGE_COLOURS.get(str(url), '#EEEEEE')
+        else:
+            colour = DIGMAP_COLOURS.get(str(url), '#EEEEEE')
         gdot.add_node(label, url=str(url), style='filled', fillcolor=colour)
 
         uppers = [str(graph.label(t[2])) for t in graph.triples([url, LEX['upper'], None])]  # noqa: E501
@@ -188,10 +193,11 @@ def ttl_to_nx(graph=None, triples=None):
     return gdot
 
 
-def graph_to_dot(graph=None, triples=None, out=None):
+def graph_to_dot(graph=None, triples=None, colour_scale="digmap", out=None):
     """Accepts either an rdflib graph, or a file with triples in .ttl form
+    Accepts either digmap or age for colour scale used for the graph
     Returns a Graphviz dotfile (rendered for us by networkx)"""
     # Translate our RDF graph into a networkx one
-    nx_graph = ttl_to_nx(graph=graph, triples=triples)
+    nx_graph = ttl_to_nx(graph=graph, triples=triples, colour_scale=colour_scale)
     # Out might be a filename or a filehandle
     write_dot(nx_graph, out)
