@@ -11,7 +11,7 @@ jobs:
 
       - name: load data into Fuseki service
         run: |
-          pip3 install requests
+          pip3 install requests SPARQLWrapper
           export FUSEKI_HOST=http://localhost:3030/
           python3 integration/fuseki_load.py
 
