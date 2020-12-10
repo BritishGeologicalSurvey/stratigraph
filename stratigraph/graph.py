@@ -140,7 +140,7 @@ def link_entities(text):
     return links
 
 
-def ttl_to_nx(graph=None, triples=None, colour_scale="digmap"):
+def ttl_to_nx(graph=None, triples=None, colour_scale='digmap'):
     """Accepts either an rdflib graph, or a file with triples in .ttl form
     Accepts either digmap or age for colour scale used for the graph
     Returns a NetworkX graph based on the contents."""
@@ -193,7 +193,7 @@ def ttl_to_nx(graph=None, triples=None, colour_scale="digmap"):
     return gdot
 
 
-def graph_to_dot(graph=None, triples=None, colour_scale="digmap", out=None):
+def graph_to_dot(graph=None, triples=None, colour_scale='digmap', out=None):
     """Accepts either an rdflib graph, or a file with triples in .ttl form
     Accepts either digmap or age for colour scale used for the graph
     Returns a Graphviz dotfile (rendered for us by networkx)"""
