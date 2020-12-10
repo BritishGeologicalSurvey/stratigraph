@@ -1,6 +1,8 @@
 import rdflib
 from stratigraph.store import GraphStore
 
+# Could wrap up namespaces neater in the Store
+
 
 def test_graph():
     g = GraphStore()

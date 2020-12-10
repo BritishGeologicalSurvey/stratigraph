@@ -1,4 +1,6 @@
+import os
 from unittest.mock import MagicMock
+import rdflib
 from fastapi.testclient import TestClient
 from stratigraph.api import app, load_graph
 
@@ -6,11 +8,15 @@ client = TestClient(app)
 
 
 class MockGraph(MagicMock):
-    pass
+    # Mock interface to the graph store.
+    # Later, mock more actual responses
 
-# Later, mock some actual responses
-#    def from_code(*args):
-#        return rdflib.Graph()
+    def in_era(*args):
+        graph = rdflib.Graph()
+        dummy = os.path.join(os.path.dirname(__file__),
+                             '../data/jurassic_tm.ttl')
+        graph.parse(dummy, format='ttl')
+        return graph
 
 
 async def load_test_graph():
