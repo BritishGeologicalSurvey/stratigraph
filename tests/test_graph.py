@@ -42,6 +42,11 @@ def test_ttl_to_nx():
     nx_graph = ttl_to_nx(triples=triples)
     assert not is_empty(nx_graph)
 
+    # Case in which we use the age colour scale
+    nx_graph = ttl_to_nx(triples=triples, colour_scale='age')
+    assert not is_empty(nx_graph)
+    nx_graph_digmap = ttl_to_nx(triples=triples)
+    assert nx_graph != nx_graph_digmap
 
 def test_graph_to_dot():
     triples = os.path.join(os.path.dirname(__file__),
