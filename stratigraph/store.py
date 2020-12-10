@@ -24,9 +24,7 @@ class GraphStore():
         (in the form of an rdflib.Graph)
         This should be the output of a SPARQL CONSTRUCT query
         """
-        graph = rdflib.Graph()
-        # These lines we should replace with a query ...
-        return graph
+        return self.graph_by_era(name, full=full)
 
     def graph_by_era(self, name, full=False):
         """
