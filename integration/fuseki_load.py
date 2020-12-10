@@ -35,12 +35,12 @@ QUERY = """PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
             WHERE {{ {0} }}""".format(CONSTRUCT)
 
 
-def create_db(name='db'):
+def create_db(name='stratigraph'):
     response = requests.post(urljoin(FUSEKI_HOST, '$/datasets'),
                              data=DB,
                              auth=HTTPBasicAuth('admin', 'admin'),
                              params={'dbType': 'mem',
-                                     'dbName': 'db'})
+                                     'dbName': db})
 
     response.raise_for_status()
 
