@@ -23,6 +23,7 @@ from stratigraph.lex_age_colours import COLOURS as AGE_COLOURS
 
 logging.basicConfig(level=logging.INFO)
 
+COLOURS = { 'age': AGE_COLOURS, 'digmap' : DIGMAP_COLOURS}
 LEX_BASEURL = 'http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/'
 LEX = Namespace('http://data.bgs.ac.uk/ref/Lexicon/Extended/')
 
@@ -168,10 +169,8 @@ def ttl_to_nx(graph=None, triples=None, colour_scale='digmap'):
         # Node attributes should be added when calling add_node
         # We add the URL and also want the node colour.
         # Not all Lexicon codes have DigMap colours, however - default to pale grey
-        if colour_scale == "age":
-            colour = AGE_COLOURS.get(str(url), '#EEEEEE')
-        else:
-            colour = DIGMAP_COLOURS.get(str(url), '#EEEEEE')
+        colours = COLOURS.get(colour_scale, {})
+        colour = colours.get(str(url), '#EEEEEE')
         gdot.add_node(label, url=str(url), style='filled', fillcolor=colour)
 
         uppers = [str(graph.label(t[2])) for t in graph.triples([url, LEX['upper'], None])]  # noqa: E501
