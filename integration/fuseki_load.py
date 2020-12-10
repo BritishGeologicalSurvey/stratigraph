@@ -10,7 +10,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 FUSEKI_HOST = os.environ.get('FUSEKI_HOST', 'http://localhost:3030/')
-ENDPOINT = 'http://data.bgs.ac.uk/vocprez/sparql'
+ENDPOINT = 'http://data.bgs.ac.uk/vocprez/endpoint'
 
 # "Assembler file" to HTTP POST create new dataset in Fuseki
 DB = """PREFIX tdb:     <http://jena.hpl.hp.com/2008/tdb#>
