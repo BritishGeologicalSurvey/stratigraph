@@ -2,7 +2,6 @@ import os
 import logging
 from urllib.error import URLError, HTTPError
 
-import rdflib
 from rdflib import Graph
 from SPARQLWrapper import SPARQLWrapper
 from SPARQLWrapper.SPARQLExceptions import QueryBadFormed, EndPointNotFound

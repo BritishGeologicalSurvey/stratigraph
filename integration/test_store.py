@@ -18,6 +18,6 @@ def test_graph_by_era():
     all_labels = [str(graph.label(s)) for s in graph.subjects()]  # noqa: E501
 
     # There SHOULD be fewer labels in the formation list than the all list
-    # Is this because non-Formations are less likely to have both upper and lower links?
-    # Is this because we haven't text mined enough, or the query is borked, or both?
+    # Because non-Formations are less likely to have both upper and lower links?
+    # Because we haven't text mined enough, or the query is borked, or both?
     assert len(all_labels) > len(formation_labels)

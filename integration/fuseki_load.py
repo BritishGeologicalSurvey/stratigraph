@@ -54,8 +54,6 @@ def add_sparql_data():
     sparql.setQuery(QUERY)
     results = sparql.query().convert()
 
-#    headers = {'Accept': 'application/n-triples'}
-
     data = results.serialize(format='nt')
 
     status = requests.put(
@@ -69,7 +67,7 @@ def add_local_data():
     """Add in our text mined sample from the Jurassic"""
     with open('./data/jurassic_tm.ttl', 'r') as infile:
         jurassic = infile.read()
-        status = requests.put(
+        status = requests.post(
                 urljoin(FUSEKI_HOST, f'{DBNAME}/data?default'),
                 headers={'Content-type': 'text/turtle'},
                 data=jurassic)
