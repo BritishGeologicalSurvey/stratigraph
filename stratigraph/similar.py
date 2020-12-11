@@ -29,7 +29,22 @@ STOP_WORDS = [
     "Sub-era",
     "Sub-eras",
     "Sub-eon",
-    "Sub-eons"]
+    "Sub-eons",
+    "Member",
+    "Members",
+    "Unit",
+    "Sub-unit",
+    "Horizon",
+    "Series",
+    "Rocks",
+    "Deposit",
+    "Deposits",
+    "Cluster",
+    "Swarm",
+    "Band",
+    "Bands",
+    "Bed",
+    "Beds"]
 
 EDIT_DIST_CUT = 0.89  # cutoff for Levenshtein similarity set by @ike
 
