@@ -9,7 +9,7 @@ from SPARQLWrapper import SPARQLWrapper
 import requests
 from requests.auth import HTTPBasicAuth
 
-DB = 'stratigraph'
+DBNAME = 'stratigraph'
 FUSEKI_HOST = os.environ.get('FUSEKI_HOST', 'http://localhost:3030/')
 ENDPOINT = 'http://data.bgs.ac.uk/vocprez/endpoint'
 
@@ -36,7 +36,7 @@ QUERY = """PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
             WHERE {{ {0} }}""".format(CONSTRUCT)
 
 
-def create_db(name=DB):
+def create_db(name=DBNAME):
     response = requests.post(urljoin(FUSEKI_HOST, '$/datasets'),
                              data=DB,
                              auth=HTTPBasicAuth('admin', 'admin'),
@@ -59,7 +59,7 @@ def add_sparql_data():
     data = results.serialize(format='nt')
 
     status = requests.put(
-            urljoin(FUSEKI_HOST, f'{DB}/data?default'),
+            urljoin(FUSEKI_HOST, f'{DBNAME}/data?default'),
             headers={'Content-type': 'application/n-triples'},
             data=data)
     status.raise_for_status()
@@ -70,7 +70,7 @@ def add_local_data():
     with open('./data/jurassic_tm.ttl', 'r') as infile:
         jurassic = infile.read()
         status = requests.put(
-                urljoin(FUSEKI_HOST, f'{DB}/data?default'),
+                urljoin(FUSEKI_HOST, f'{DBNAME}/data?default'),
                 headers={'Content-type': 'text/turtle'},
                 data=jurassic)
         status.raise_for_status()
