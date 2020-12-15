@@ -6,7 +6,7 @@ from rdflib import Graph
 from SPARQLWrapper import SPARQLWrapper
 from SPARQLWrapper.SPARQLExceptions import QueryBadFormed, EndPointNotFound
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 DB = 'stratigraph'
 ENDPOINT = os.environ.get(
@@ -17,30 +17,38 @@ ENDPOINT = os.environ.get(
 class GraphStore():
     """Intended as an abstraction in front of a graph store"""
 
-    def in_era(self, name, full=False):
+    def in_era(self, era_code, full=False):
         """
         Returns a stratigraph for a geochronological era.
         (in the form of an rdflib.Graph)
         This should be the output of a SPARQL CONSTRUCT query
         """
-        return self.graph_by_era(name, full=full)
+        return self.graph_by_era(era_code, full=full)
 
-    def graph_by_era(self, name, full=False):
+    def graph_by_era(self, era_code, full=False):
         """
-        Accepts a BGS Linked Data URL
+        Accepts the code for a geochron concept
         Retrieves the upper/lower boundary relations
-        for Lexicon terms with 'hasBroaderPredominantAge'
-        that matches this URL
-        TODO - using `name` until we change to URL
+        for Lexicon terms with an age range that is contained within the geochron cnncept's age range
         """
 
         where = """
-            ?subject lex:hasBroaderPredominantAge "{0}"@en .
-            ?subject ext:upper ?upper .
-            ?subject ext:lower ?lower .
-            ?subject rdfs:label ?label .""".format(name)
+            ?lex lex:hasYoungestAgeValue ?minAge .
+            ?lex lex:hasOldestAgeValue ?maxAge .
+            ?era a skos:Concept .
+            ?era skos:inScheme <http://data.bgs.ac.uk/ref/Geochronology> .
+            ?era geochron:minAgeValue ?eraMinAge .
+            ?era geochron:maxAgeValue ?eraMaxAge .
+            ?era skos:notation "{0}"@en .   
+            ?subject rdfs:label ?label .
+            OPTIONAL { ?subject ext:upper ?upper }
+            OPTIONAL { ?subject ext:lower ?lower }
+            FILTER ((?minAge > ?eraMinAge) && (?maxAge < ?eraMaxAge))
+            # FILTER ((?eraMaxAge > ?minAge && ?minAge > ?eraMinAge) || (?eraMinAge < ?maxAge || ?maxAge < ?eraMaxAge)) # units overlapping the era
+            """.format(era_code)
 
         # unless asking for full graph, only return Formation types
+        # TODO if upper or lower are not of rank Formation, use skos:broader relations until reach a parent Formation
         if not full:
             where += "\n ?subject lex:hasRockUnitRank rock:F ."
 

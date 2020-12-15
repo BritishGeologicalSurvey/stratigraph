@@ -22,13 +22,24 @@ PREFIX ja:      <http://jena.hpl.hp.com/2005/11/Assembler#>
 <#dataset> rdf:type         tdb:DatasetTDB ;
     tdb:location "DB" ;"""
 
-# Query to collect Jurassic data from bgs.ac.uk
+# Query to collect lexicon entries of Jurassic age (code J) from bgs.ac.uk
 CONSTRUCT = """
- ?subject lex:hasBroaderPredominantAge "Jurassic"@en .
- ?subject ?predicate ?object .
+ ?lex lex:hasYoungestAgeValue ?minAge .
+ ?lex lex:hasOldestAgeValue ?maxAge .
+ ?era a skos:Concept .
+ ?era skos:inScheme <http://data.bgs.ac.uk/ref/Geochronology> .
+ ?era geochron:minAgeValue ?eraMinAge .
+ ?era geochron:maxAgeValue ?eraMaxAge .
+ ?era skos:notation "J"@en .   
+ FILTER ((?minAge > ?eraMinAge) && (?maxAge < ?eraMaxAge))
+# FILTER ((?eraMaxAge > ?minAge && ?minAge > ?eraMinAge) || (?eraMinAge < ?maxAge || ?maxAge < ?eraMaxAge)) # units overlapping the era
+
 """
 
 QUERY = """PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
+           PREFIX geochron: <http://data.bgs.ac.uk/ref/Geochronology/>
+           PREFIX skos: <http://www.w3.org/2000/01/rdf-schema#>
+           PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
            CONSTRUCT {{
                 {0}
@@ -39,7 +50,7 @@ QUERY = """PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
 def create_db(name=DBNAME):
     response = requests.post(urljoin(FUSEKI_HOST, '$/datasets'),
                              data=DB,
-                             auth=HTTPBasicAuth('admin', 'admin'),
+                             auth=HTTPBasicAuth('admin', 'hello'),
                              params={'dbType': 'mem',
                                      'dbName': name})
 
@@ -47,8 +58,8 @@ def create_db(name=DBNAME):
 
 
 def add_sparql_data():
-    """Collect everything that hasBroaderPredominantAge "Jurassic"@en
-    Will we miss data this way?
+    """Collect everything where the age is contained within the Jurassic age range
+    Should we include anything that overlaps the Jurassic?
     """
     sparql = SPARQLWrapper(ENDPOINT)
     sparql.setQuery(QUERY)
