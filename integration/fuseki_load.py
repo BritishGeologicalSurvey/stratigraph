@@ -38,13 +38,15 @@ FILTER = """
             FILTER (?era = <http://data.bgs.ac.uk/id/Geochronology/Division/J> )
             """
 
+WHERE = CONSTRUCT+FILTER
+
 QUERY = """PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
            PREFIX geochron: <http://data.bgs.ac.uk/ref/Geochronology/>
            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
            CONSTRUCT {{
                 {0}
             }}
-            WHERE {{ {1}}}""".format(CONSTRUCT, CONSTRUCT+FILTER)
+            WHERE {{ {1}}}""".format(CONSTRUCT, WHERE)
 
 
 
