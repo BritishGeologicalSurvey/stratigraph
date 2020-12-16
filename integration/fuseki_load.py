@@ -3,11 +3,14 @@ into an in-memory Fuseki store - useful to run integration tests in CI
 (Based on a test done for VocPrez showing this approach to CI)
 """
 
+import logging
 import os
 from urllib.parse import urljoin
 from SPARQLWrapper import SPARQLWrapper
 import requests
 from requests.auth import HTTPBasicAuth
+
+logging.basicConfig(level=logging.DEBUG)
 
 DBNAME = 'stratigraph'
 FUSEKI_HOST = os.environ.get('FUSEKI_HOST', 'http://localhost:3030/')
@@ -18,28 +21,16 @@ DB = """PREFIX tdb:     <http://jena.hpl.hp.com/2008/tdb#>
 PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX ja:      <http://jena.hpl.hp.com/2005/11/Assembler#>
-
 <#dataset> rdf:type         tdb:DatasetTDB ;
     tdb:location "DB" ;"""
 
-# Query to collect lexicon entries of Jurassic age (code J) from bgs.ac.uk
+# Query to collect Jurassic data from bgs.ac.uk
 CONSTRUCT = """
- ?lex lex:hasYoungestAgeValue ?minAge .
- ?lex lex:hasOldestAgeValue ?maxAge .
- ?era a skos:Concept .
- ?era skos:inScheme <http://data.bgs.ac.uk/ref/Geochronology> .
- ?era geochron:minAgeValue ?eraMinAge .
- ?era geochron:maxAgeValue ?eraMaxAge .
- ?era skos:notation "J"@en .   
- FILTER ((?minAge > ?eraMinAge) && (?maxAge < ?eraMaxAge))
-# FILTER ((?eraMaxAge > ?minAge && ?minAge > ?eraMinAge) || (?eraMinAge < ?maxAge || ?maxAge < ?eraMaxAge)) # units overlapping the era
-
+ ?subject lex:hasBroaderPredominantAge <http://data.bgs.ac.uk/id/Geochronology/Division/J> .
+ ?subject ?predicate ?object .
 """
 
 QUERY = """PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
-           PREFIX geochron: <http://data.bgs.ac.uk/ref/Geochronology/>
-           PREFIX skos: <http://www.w3.org/2000/01/rdf-schema#>
-           PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
            CONSTRUCT {{
                 {0}
@@ -47,12 +38,15 @@ QUERY = """PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
             WHERE {{ {0} }}""".format(CONSTRUCT)
 
 
+
 def create_db(name=DBNAME):
+    logging.debug("in create_db")
     response = requests.post(urljoin(FUSEKI_HOST, '$/datasets'),
                              data=DB,
                              auth=HTTPBasicAuth('admin', 'hello'),
                              params={'dbType': 'mem',
                                      'dbName': name})
+    logging.debug("create_db")
 
     response.raise_for_status()
 
@@ -63,6 +57,9 @@ def add_sparql_data():
     """
     sparql = SPARQLWrapper(ENDPOINT)
     sparql.setQuery(QUERY)
+
+    logging.debug(QUERY)
+
     results = sparql.query().convert()
 
     data = results.serialize(format='nt')

@@ -17,35 +17,38 @@ ENDPOINT = os.environ.get(
 class GraphStore():
     """Intended as an abstraction in front of a graph store"""
 
-    def in_era(self, era_code, full=False):
+    def in_era(self, era_uri, full=False):
         """
         Returns a stratigraph for a geochronological era.
         (in the form of an rdflib.Graph)
         This should be the output of a SPARQL CONSTRUCT query
         """
-        return self.graph_by_era(era_code, full=full)
+        return self.graph_by_era(era_uri, full=full)
 
-    def graph_by_era(self, era_code, full=False):
+    def graph_by_era(self, era_uri, full=False):
         """
         Accepts the code for a geochron concept
         Retrieves the upper/lower boundary relations
         for Lexicon terms with an age range that is contained within the geochron cnncept's age range
+        Change to 
+        # FILTER ((?eraMaxAge > ?minAge && ?minAge > ?eraMinAge) || (?eraMinAge < ?maxAge || ?maxAge < ?eraMaxAge)) # for units overlapping the era
         """
 
-        where = """
+        construct = """
             ?lex lex:hasYoungestAgeValue ?minAge .
             ?lex lex:hasOldestAgeValue ?maxAge .
             ?era a skos:Concept .
             ?era skos:inScheme <http://data.bgs.ac.uk/ref/Geochronology> .
             ?era geochron:minAgeValue ?eraMinAge .
             ?era geochron:maxAgeValue ?eraMaxAge .
-            ?era skos:notation "{0}"@en .   
             ?subject rdfs:label ?label .
             OPTIONAL { ?subject ext:upper ?upper }
             OPTIONAL { ?subject ext:lower ?lower }
+            """
+        where = construct+"""
             FILTER ((?minAge > ?eraMinAge) && (?maxAge < ?eraMaxAge))
-            # FILTER ((?eraMaxAge > ?minAge && ?minAge > ?eraMinAge) || (?eraMinAge < ?maxAge || ?maxAge < ?eraMaxAge)) # units overlapping the era
-            """.format(era_code)
+            FILTER (?era = {0} )
+            """.format(era_uri)
 
         # unless asking for full graph, only return Formation types
         # TODO if upper or lower are not of rank Formation, use skos:broader relations until reach a parent Formation
@@ -61,8 +64,8 @@ class GraphStore():
                 {0}
             }}
             WHERE {{
-                {0}
-            }}""".format(where)
+                {1}
+            }}""".format(construct,where)
 
         logging.debug(query)
 
