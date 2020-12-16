@@ -30,35 +30,46 @@ class GraphStore():
         Accepts the code for a geochron concept
         Retrieves the upper/lower boundary relations
         for Lexicon terms with an age range that is contained within the geochron cnncept's age range
-        Change to 
-        # FILTER ((?eraMaxAge > ?minAge && ?minAge > ?eraMinAge) || (?eraMinAge < ?maxAge || ?maxAge < ?eraMaxAge)) # for units overlapping the era
         """
-
+        # FILTER clauses not allowed in CONSTRUCT, so append those later to build the WHERE clause
         construct = """
             ?lex lex:hasYoungestAgeValue ?minAge .
             ?lex lex:hasOldestAgeValue ?maxAge .
-            ?era a skos:Concept .
-            ?era skos:inScheme <http://data.bgs.ac.uk/ref/Geochronology> .
+            ?lex lex:hasRockUnitRank ?rank .
             ?era geochron:minAgeValue ?eraMinAge .
             ?era geochron:maxAgeValue ?eraMaxAge .
-            ?subject rdfs:label ?label .
-            OPTIONAL { ?subject ext:upper ?upper }
-            OPTIONAL { ?subject ext:lower ?lower }
+            ?lex rdfs:label ?label .
             """
-        where = construct+"""
+        upperLowerOptional = """
+            OPTIONAL { ?lex ext:upper ?upper }
+            OPTIONAL { ?lex ext:lower ?lower }
+            """
+        ageContainsFilter = """
             FILTER ((?minAge > ?eraMinAge) && (?maxAge < ?eraMaxAge))
             FILTER (?era = {0} )
             """.format(era_uri)
+        # ageOverlapsFilter provided here but not used yet
+        ageOverlapsFilter = """
+            FILTER ((?eraMaxAge > ?minAge && ?minAge > ?eraMinAge) || (?eraMinAge < ?maxAge || ?maxAge < ?eraMaxAge))
+            FILTER (?era = {0} )
+            """.format(era_uri)
+        rankFilter = """
+            FILTER (?rank= rock:F)
+            """
+        #TODO may want to switch between ageContainsFilter and ageOverlapsFilter?
+        where = construct+upperLowerOptional+ageContainsFilter
 
         # unless asking for full graph, only return Formation types
         # TODO if upper or lower are not of rank Formation, use skos:broader relations until reach a parent Formation
         if not full:
-            where += "\n ?subject lex:hasRockUnitRank rock:F ."
+            where += rankFilter
 
         query = """
             PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
+            PREFIX geochron: <http://data.bgs.ac.uk/ref/Geochronology/>
             PREFIX rock: <http://data.bgs.ac.uk/id/Lexicon/RockUnitRank/>
             PREFIX ext: <http://data.bgs.ac.uk/ref/Lexicon/Extended/>
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
             CONSTRUCT {{
                 {0}

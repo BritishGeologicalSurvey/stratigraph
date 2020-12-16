@@ -26,16 +26,25 @@ PREFIX ja:      <http://jena.hpl.hp.com/2005/11/Assembler#>
 
 # Query to collect Jurassic data from bgs.ac.uk
 CONSTRUCT = """
- ?subject lex:hasBroaderPredominantAge <http://data.bgs.ac.uk/id/Geochronology/Division/J> .
- ?subject ?predicate ?object .
-"""
+            ?lex lex:hasYoungestAgeValue ?minAge .
+            ?lex lex:hasOldestAgeValue ?maxAge .
+            ?era geochron:minAgeValue ?eraMinAge .
+            ?era geochron:maxAgeValue ?eraMaxAge .
+            ?lex ?predicate ?object .
+            """
+
+FILTER = """
+            FILTER ((?minAge > ?eraMinAge) && (?maxAge < ?eraMaxAge))
+            FILTER (?era = <http://data.bgs.ac.uk/id/Geochronology/Division/J> )
+            """
 
 QUERY = """PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
+           PREFIX geochron: <http://data.bgs.ac.uk/ref/Geochronology/>
            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
            CONSTRUCT {{
                 {0}
             }}
-            WHERE {{ {0} }}""".format(CONSTRUCT)
+            WHERE {{ {1}}}""".format(CONSTRUCT, CONSTRUCT+FILTER)
 
 
 
