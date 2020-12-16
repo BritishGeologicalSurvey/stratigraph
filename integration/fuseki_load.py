@@ -25,6 +25,7 @@ PREFIX ja:      <http://jena.hpl.hp.com/2005/11/Assembler#>
     tdb:location "DB" ;"""
 
 # Query to collect Jurassic data from bgs.ac.uk
+# FILTER not allowed in CONSTRUCT
 CONSTRUCT = """
             ?lex lex:hasYoungestAgeValue ?minAge .
             ?lex lex:hasOldestAgeValue ?maxAge .
@@ -54,7 +55,7 @@ def create_db(name=DBNAME):
     logging.debug("in create_db")
     response = requests.post(urljoin(FUSEKI_HOST, '$/datasets'),
                              data=DB,
-                             auth=HTTPBasicAuth('admin', 'hello'),
+                             auth=HTTPBasicAuth('admin', 'admin'),
                              params={'dbType': 'mem',
                                      'dbName': name})
     logging.debug("create_db")
