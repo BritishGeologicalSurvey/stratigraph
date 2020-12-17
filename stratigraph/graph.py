@@ -21,7 +21,7 @@ from stratigraph.similar import Similar
 from stratigraph.lex_digmap_colours import COLOURS as DIGMAP_COLOURS
 from stratigraph.lex_age_colours import COLOURS as AGE_COLOURS
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 COLOURS = { 'age': AGE_COLOURS, 'digmap' : DIGMAP_COLOURS}
 LEX_BASEURL = 'http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/'
@@ -153,7 +153,10 @@ def ttl_to_nx(graph=None, triples=None, colour_scale='digmap'):
         try:
             graph.parse(triples, format='turtle')
         # may also be rdflib parsing errors
-        except (FileNotFoundError, ValueError) as err:
+        except FileNotFoundError as err:
+            logging.error(err)
+        except ValueError as err:
+            logging.error('no input')
             logging.error(err)
 
     gdot = nx.DiGraph()
@@ -198,5 +201,6 @@ def graph_to_dot(graph=None, triples=None, colour_scale='digmap'):
     Returns a Graphviz dotfile (rendered for us by networkx)"""
     # Translate our RDF graph into a networkx one
     nx_graph = ttl_to_nx(graph=graph, triples=triples, colour_scale=colour_scale)
+    logging.debug(nx_graph)
     # Out might be a filename or a filehandle
     return to_pydot(nx_graph).to_string()

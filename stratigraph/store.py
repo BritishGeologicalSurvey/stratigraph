@@ -27,9 +27,10 @@ class GraphStore():
 
     def graph_by_era(self, era_uri, full=False):
         """
-        Accepts the code for a geochron concept
+        Accepts the URI for a geochron concept
         Retrieves the upper/lower boundary relations
-        for Lexicon terms with an age range that is contained within the geochron cnncept's age range
+        for Lexicon terms with an age range that is contained
+        within the geochron concept's age range
         """
         # FILTER clauses not allowed in CONSTRUCT, so append those later to build the WHERE clause
         construct = """
@@ -46,12 +47,12 @@ class GraphStore():
             """
         ageContainsFilter = """
             FILTER ((?minAge > ?eraMinAge) && (?maxAge < ?eraMaxAge))
-            FILTER (?era = {0} )
+            FILTER (?era = <{0}> )
             """.format(era_uri)
         # ageOverlapsFilter provided here but not used yet
         ageOverlapsFilter = """
             FILTER ((?eraMaxAge > ?minAge && ?minAge > ?eraMinAge) || (?eraMinAge < ?maxAge || ?maxAge < ?eraMaxAge))
-            FILTER (?era = {0} )
+            FILTER (?era = <{0}> )
             """.format(era_uri)
         rankFilter = """
             FILTER (?rank= rock:F)
