@@ -20,4 +20,4 @@ if __name__ == '__main__':
     ttl = './data/jurassic_tm.ttl'
     # Write either to file path or filehandle
     with open('./data/jurassic_tm.dot', 'w') as outfile:
-        graph_to_dot(triples=ttl, colour_scale=colour_scale, out=outfile)
+        outfile.write(graph_to_dot(triples=ttl, colour_scale=colour_scale))

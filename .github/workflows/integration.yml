@@ -1,0 +1,37 @@
+name: Run tests against Fuseki
+on: push
+
+jobs:
+  db-test:
+    # Containers must run in Linux based operating systems
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: load data into Fuseki service
+        run: |
+          pip3 install requests SPARQLWrapper
+          export FUSEKI_HOST=http://localhost:3030/
+          python3 integration/fuseki_load.py
+
+      - name: run the integration tests
+        run: |
+          pip3 install setuptools wheel gunicorn
+          pip3 install -r requirements.txt
+          pip3 install pytest
+          export ENDPOINT=http://localhost:3030/stratigraph/query
+          # Run the test server - better to rewrite the tests?
+          export PYTHONPATH=.:..
+          python3 -m pytest -vs integration
+
+    # Service containers to run with `container-job`
+    services:
+      # Label used to access the service container
+      fuseki:
+        # Docker Hub image
+        image: stain/jena-fuseki
+        env:
+          ADMIN_PASSWORD: admin
+        ports:
+          - 3030:3030

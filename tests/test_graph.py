@@ -63,5 +63,5 @@ def test_graph_to_dot():
     graph.parse(triples, format='ttl')
     # write_dot writes to file path or filehandle
     # read it back in when sending via the API?
-    with open('test.dot', 'w') as outfile:
-        graph_to_dot(graph=graph, out=outfile)
+    dot = graph_to_dot(graph=graph)
+    assert 'data.bgs.ac.uk' in dot
