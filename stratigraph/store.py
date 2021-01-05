@@ -1,4 +1,5 @@
 import os
+from functools import reduce
 import logging
 from urllib.error import URLError, HTTPError
 
@@ -32,7 +33,8 @@ class GraphStore():
         for Lexicon terms with an age range that is contained
         within the geochron concept's age range
         """
-        # FILTER clauses not allowed in CONSTRUCT, so append those later to build the WHERE clause
+        # FILTER clauses not allowed in CONSTRUCT, so append those later to
+        # build the WHERE clause
         construct = """
             ?lex lex:hasYoungestAgeValue ?minAge .
             ?lex lex:hasOldestAgeValue ?maxAge .
@@ -40,50 +42,69 @@ class GraphStore():
             ?era geochron:minAgeValue ?eraMinAge .
             ?era geochron:maxAgeValue ?eraMaxAge .
             ?lex rdfs:label ?label .
-            """
-        upperLowerOptional = """
+           """
+        upper_link = "?lex ext:upper ?upper ."
+        lower_link = "?lex ext:lower ?lower ."
+
+        upper_lower_optional = """
             OPTIONAL { ?lex ext:upper ?upper }
             OPTIONAL { ?lex ext:lower ?lower }
             """
-        ageContainsFilter = """
+        age_contains_filter = """
             FILTER ((?minAge > ?eraMinAge) && (?maxAge < ?eraMaxAge))
             FILTER (?era = <{0}> )
             """.format(era_uri)
-        # ageOverlapsFilter provided here but not used yet
-        ageOverlapsFilter = """
+
+        # age_overlaps_filter provided here but not used yet
+        # TODO may want to switch between contains & overlaps?
+        age_overlaps_filter = """
             FILTER ((?eraMaxAge > ?minAge && ?minAge > ?eraMinAge) || (?eraMinAge < ?maxAge || ?maxAge < ?eraMaxAge))
             FILTER (?era = <{0}> )
-            """.format(era_uri)
-        rankFilter = """
+            """.format(era_uri)  # noqa: F841 E501
+        rank_filter = """
             FILTER (?rank= rock:F)
             """
-        #TODO may want to switch between ageContainsFilter and ageOverlapsFilter?
-        where = construct+upperLowerOptional+ageContainsFilter
 
-        # unless asking for full graph, only return Formation types
-        # TODO if upper or lower are not of rank Formation, use skos:broader relations until reach a parent Formation
-        if not full:
-            where += rankFilter
+        # CONSTRUCT two graphs, one for upper, one for lower links, add them
+        # Because we can't put OPTIONAL fields in a CONSTRUCT clause
+        where = construct + upper_lower_optional + age_contains_filter
+        graphs = []
 
-        query = """
-            PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
-            PREFIX geochron: <http://data.bgs.ac.uk/ref/Geochronology/>
-            PREFIX rock: <http://data.bgs.ac.uk/id/Lexicon/RockUnitRank/>
-            PREFIX ext: <http://data.bgs.ac.uk/ref/Lexicon/Extended/>
-            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-            CONSTRUCT {{
-                {0}
-            }}
-            WHERE {{
-                {1}
-            }}""".format(construct,where)
+        for link in (upper_link, lower_link):
+            construct = construct + link
 
-        logging.debug(query)
+            # unless asking for full graph, only return Formation types
+            # TODO if upper or lower not of rank Formation, use skos:broader
+            # relations until reach a parent Formation
+            if not full:
+                where += rank_filter
 
-        sparql = SPARQLWrapper(ENDPOINT)
-        sparql.setQuery(query)
-        return self.try_sparql_query(sparql)
+            query = """
+                PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
+                PREFIX geochron: <http://data.bgs.ac.uk/ref/Geochronology/>
+                PREFIX rock: <http://data.bgs.ac.uk/id/Lexicon/RockUnitRank/>
+                PREFIX ext: <http://data.bgs.ac.uk/ref/Lexicon/Extended/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                CONSTRUCT {{
+                    {0}
+                }}
+                WHERE {{
+                    {1}
+                }}""".format(construct, where)
+
+            logging.debug(query)
+
+            sparql = SPARQLWrapper(ENDPOINT)
+            sparql.setQuery(query)
+
+            graphs.append(self.try_sparql_query(sparql))
+
+        # Nice feature of rdflib to combine graphs with + operator
+        def sum_graphs(g1, g2):
+            return g1 + g2
+
+        return reduce(sum_graphs, graphs)
 
     def try_sparql_query(self, sparql):
         """Get results from a sparql query, handling some error states.
