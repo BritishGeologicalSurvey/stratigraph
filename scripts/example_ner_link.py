@@ -5,10 +5,11 @@ from a SPARQL query (within stratigraph.similar)
 from SPARQLWrapper import SPARQLWrapper, JSON
 from stratigraph.corenlp import entities
 from stratigraph.similar import Similar
+from stratigraph.ns import LEXICON
 
 LEX_CODE = 'MMG'
-LEX_BASEURL = 'https://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/'
-LEX_URL = 'http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/MMG'
+LEX_URL = str(LEXICON[LEX_CODE])
+
 QUERY = """
 PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
 SELECT ?upper ?lower
