@@ -23,7 +23,7 @@ from stratigraph.lex_age_colours import COLOURS as AGE_COLOURS
 
 logging.basicConfig(level=logging.DEBUG)
 
-COLOURS = { 'age': AGE_COLOURS, 'digmap' : DIGMAP_COLOURS}
+COLOURS = {'age': AGE_COLOURS, 'digmap': DIGMAP_COLOURS}
 LEX_BASEURL = 'http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/'
 LEX = Namespace('http://data.bgs.ac.uk/ref/Lexicon/Extended/')
 
@@ -171,7 +171,8 @@ def ttl_to_nx(graph=None, triples=None, colour_scale='digmap'):
 
         # Node attributes should be added when calling add_node
         # We add the URL and also want the node colour.
-        # Not all Lexicon codes have DigMap colours, however - default to pale grey
+        # Not all Lexicon codes have DigMap colours, however - default to pale
+        # grey
         colours = COLOURS.get(colour_scale, {})
         colour = colours.get(str(url), '#EEEEEE')
         gdot.add_node(label, url=str(url), style='filled', fillcolor=colour)
@@ -200,7 +201,10 @@ def graph_to_dot(graph=None, triples=None, colour_scale='digmap'):
     Accepts either digmap or age for colour scale used for the graph
     Returns a Graphviz dotfile (rendered for us by networkx)"""
     # Translate our RDF graph into a networkx one
-    nx_graph = ttl_to_nx(graph=graph, triples=triples, colour_scale=colour_scale)
+    nx_graph = ttl_to_nx(
+        graph=graph,
+        triples=triples,
+        colour_scale=colour_scale)
     logging.debug(nx_graph)
     # Out might be a filename or a filehandle
     return to_pydot(nx_graph).to_string()

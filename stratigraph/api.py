@@ -18,6 +18,7 @@ from stratigraph.ns import GEOCHRON, LEXICON
 
 logging.basicConfig(level=logging.DEBUG)
 
+
 def load_graph():
     """Interface to our graph store.
     Loaded via Depends() below to make mock testing much easier
@@ -57,6 +58,12 @@ async def geo_era(code: str,
     """
     uri = str(GEOCHRON[code])
     g = graph.in_era(uri)
+
     logging.debug(g)
-    dot = graph_to_dot(g)
-    return PlainTextResponse(dot)
+    response = ''
+    if not format or format == 'dot':
+        response = graph_to_dot(g)
+    if format == 'ttl':
+        response = g.serialize(format='ttl')
+
+    return PlainTextResponse(response)
