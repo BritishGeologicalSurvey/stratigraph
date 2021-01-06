@@ -48,6 +48,7 @@ async def lex_code(code: str, graph=Depends(load_graph)):
 async def geo_era(code: str,
                   full: bool = False,
                   format: Optional[str] = 'dot',
+                  colours: Optional[str] = 'digmap',
                   graph=Depends(load_graph)):
     """
     Given a Geochron term, return the graph filtered by everything
@@ -62,7 +63,7 @@ async def geo_era(code: str,
     logging.debug(g)
     response = ''
     if not format or format == 'dot':
-        response = graph_to_dot(g)
+        response = graph_to_dot(g, colour_scale=colours)
     if format == 'ttl':
         response = g.serialize(format='ttl')
 

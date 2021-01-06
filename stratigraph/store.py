@@ -7,7 +7,7 @@ from rdflib import Graph
 from SPARQLWrapper import SPARQLWrapper
 from SPARQLWrapper.SPARQLExceptions import QueryBadFormed, EndPointNotFound
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 DB = 'stratigraph'
 ENDPOINT = os.environ.get(
