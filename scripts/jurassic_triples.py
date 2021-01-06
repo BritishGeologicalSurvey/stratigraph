@@ -8,15 +8,14 @@ import pandas as pd
 from rdflib import Graph
 from stratigraph.graph import bounds_texts, bounds_links, \
         link_entities, triples
+from stratigraph.ns import LEXICON
 logging.basicConfig(level=logging.INFO)
-
-LEX_BASEURL = 'http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/'
 
 
 if __name__ == '__main__':
     formations = pd.read_csv('./data/Jurassic_Formations.csv')
     formations = formations[['LEX_CODE', 'UNIT_NAME']]
-    formations['URL'] = LEX_BASEURL + formations['LEX_CODE']
+    formations['URL'] = LEXICON[formations['LEX_CODE']]
     links = list(formations['URL'])
     G = Graph()
     for url in links:

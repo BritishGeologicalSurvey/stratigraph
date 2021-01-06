@@ -7,3 +7,4 @@ from rdflib import Namespace
 
 GEOCHRON = Namespace('http://data.bgs.ac.uk/id/Geochronology/Division/')
 LEXICON = Namespace('http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/')
+LEX_EXT = Namespace('http://data.bgs.ac.uk/ref/Lexicon/Extended/')

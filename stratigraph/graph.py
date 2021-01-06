@@ -20,12 +20,11 @@ from stratigraph.corenlp import entities
 from stratigraph.similar import Similar
 from stratigraph.lex_digmap_colours import COLOURS as DIGMAP_COLOURS
 from stratigraph.lex_age_colours import COLOURS as AGE_COLOURS
+from stratigraph.ns import LEX_EXT
 
 logging.basicConfig(level=logging.DEBUG)
 
 COLOURS = {'age': AGE_COLOURS, 'digmap': DIGMAP_COLOURS}
-LEX_BASEURL = 'http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/'
-LEX = Namespace('http://data.bgs.ac.uk/ref/Lexicon/Extended/')
 
 QUERY = """
 PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
@@ -119,7 +118,7 @@ def triples(source, entities, relation='upper', graph=None):
             continue
 
         # Add to the RDF graph of triples
-        graph.add([URIRef(source), LEX[relation], URIRef(entity['url'])])
+        graph.add([URIRef(source), LEX_EXT[relation], URIRef(entity['url'])])
         graph.add([URIRef(entity['url']), RDFS.label, Literal(entity['name'])])
     return graph
 
@@ -177,8 +176,8 @@ def ttl_to_nx(graph=None, triples=None, colour_scale='digmap'):
         colour = colours.get(str(url), '#EEEEEE')
         gdot.add_node(label, url=str(url), style='filled', fillcolor=colour)
 
-        uppers = [str(graph.label(t[2])) for t in graph.triples([url, LEX['upper'], None])]  # noqa: E501
-        lowers = [str(graph.label(t[2])) for t in graph.triples([url, LEX['lower'], None])]  # noqa: E501
+        uppers = [str(graph.label(t[2])) for t in graph.triples([url, LEX_EXT['upper'], None])]  # noqa: E501
+        lowers = [str(graph.label(t[2])) for t in graph.triples([url, LEX_EXT['lower'], None])]  # noqa: E501
 
         for strat in uppers:
             # don't add self-referential edges
