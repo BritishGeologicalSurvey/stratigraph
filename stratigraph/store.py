@@ -71,13 +71,13 @@ class GraphStore():
         graphs = []
 
         for link in (upper_link, lower_link):
-            construct = construct + link
-
+            use_construct = construct + link
+            use_where = where
             # unless asking for full graph, only return Formation types
             # TODO if upper or lower not of rank Formation, use skos:broader
             # relations until reach a parent Formation
             if not full:
-                where += rank_filter
+                use_where += rank_filter
 
             query = """
                 PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
@@ -91,7 +91,7 @@ class GraphStore():
                 }}
                 WHERE {{
                     {1}
-                }}""".format(construct, where)
+                }}""".format(use_construct, use_where)
 
             logging.debug(query)
 

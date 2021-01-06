@@ -57,7 +57,7 @@ async def geo_era(code: str,
     Optional 'format' (TODO: not implemented, default dotfile)
     """
     uri = str(GEOCHRON[code])
-    g = graph.in_era(uri)
+    g = graph.in_era(uri, full=full)
 
     logging.debug(g)
     response = ''
