@@ -16,7 +16,7 @@ from stratigraph.store import GraphStore
 from stratigraph.graph import graph_to_dot
 from stratigraph.ns import GEOCHRON, LEXICON
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 def load_graph():
