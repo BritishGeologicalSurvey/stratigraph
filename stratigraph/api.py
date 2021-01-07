@@ -47,6 +47,7 @@ async def lex_code(code: str, graph=Depends(load_graph)):
 @app.get("/era/{code}")
 async def geo_era(code: str,
                   full: bool = False,
+                  groups: bool = False,
                   format: Optional[str] = 'dot',
                   colours: Optional[str] = 'digmap',
                   graph=Depends(load_graph)):
@@ -58,7 +59,7 @@ async def geo_era(code: str,
     Optional 'format' (TODO: not implemented, default dotfile)
     """
     uri = str(GEOCHRON[code])
-    g = graph.in_era(uri, full=full)
+    g = graph.graph_by_era(uri, full=full, groups=groups)
 
     logging.debug(g)
     response = ''
