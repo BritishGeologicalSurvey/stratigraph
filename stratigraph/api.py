@@ -14,7 +14,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import PlainTextResponse
 from stratigraph.store import GraphStore
 from stratigraph.graph import graph_to_dot
-from stratigraph.ns import GEOCHRON, LEXICON
+from stratigraph.ns import GEOCHRON
 
 logging.basicConfig(level=logging.DEBUG)
 
