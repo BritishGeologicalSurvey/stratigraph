@@ -11,5 +11,5 @@ def test_graph():
 
 def test_era():
     g = GraphStore()
-    graph = g.in_era('Jurassic')
+    graph = g.graph_by_era('Jurassic')
     assert isinstance(graph, rdflib.Graph)
