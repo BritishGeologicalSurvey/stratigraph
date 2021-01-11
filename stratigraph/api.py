@@ -14,9 +14,9 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import PlainTextResponse
 from stratigraph.store import GraphStore
 from stratigraph.graph import graph_to_dot
-from stratigraph.ns import GEOCHRON, LEXICON
+from stratigraph.ns import GEOCHRON
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 def load_graph():
@@ -47,7 +47,9 @@ async def lex_code(code: str, graph=Depends(load_graph)):
 @app.get("/era/{code}")
 async def geo_era(code: str,
                   full: bool = False,
+                  groups: bool = False,
                   format: Optional[str] = 'dot',
+                  colours: Optional[str] = 'digmap',
                   graph=Depends(load_graph)):
     """
     Given a Geochron term, return the graph filtered by everything
@@ -57,12 +59,12 @@ async def geo_era(code: str,
     Optional 'format' (TODO: not implemented, default dotfile)
     """
     uri = str(GEOCHRON[code])
-    g = graph.in_era(uri)
+    g = graph.graph_by_era(uri, full=full, groups=groups)
 
     logging.debug(g)
     response = ''
     if not format or format == 'dot':
-        response = graph_to_dot(g)
+        response = graph_to_dot(g, colour_scale=colours)
     if format == 'ttl':
         response = g.serialize(format='ttl')
 

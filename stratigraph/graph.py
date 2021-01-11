@@ -13,7 +13,7 @@ import urllib
 import networkx as nx
 from networkx.drawing.nx_pydot import to_pydot
 import rdflib
-from rdflib import Namespace, URIRef, Literal
+from rdflib import URIRef, Literal
 from rdflib.namespace import RDFS
 from SPARQLWrapper import SPARQLWrapper, JSON
 from stratigraph.corenlp import entities
@@ -22,7 +22,7 @@ from stratigraph.lex_digmap_colours import COLOURS as DIGMAP_COLOURS
 from stratigraph.lex_age_colours import COLOURS as AGE_COLOURS
 from stratigraph.ns import LEX_EXT
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 COLOURS = {'age': AGE_COLOURS, 'digmap': DIGMAP_COLOURS}
 

@@ -18,15 +18,7 @@ ENDPOINT = os.environ.get(
 class GraphStore():
     """Intended as an abstraction in front of a graph store"""
 
-    def in_era(self, era_uri, full=False):
-        """
-        Returns a stratigraph for a geochronological era.
-        (in the form of an rdflib.Graph)
-        This should be the output of a SPARQL CONSTRUCT query
-        """
-        return self.graph_by_era(era_uri, full=full)
-
-    def graph_by_era(self, era_uri, full=False):
+    def graph_by_era(self, era_uri, full=False, groups=False):
         """
         Accepts the URI for a geochron concept
         Retrieves the upper/lower boundary relations
@@ -61,8 +53,11 @@ class GraphStore():
             FILTER ((?eraMaxAge > ?minAge && ?minAge > ?eraMinAge) || (?eraMinAge < ?maxAge || ?maxAge < ?eraMaxAge))
             FILTER (?era = <{0}> )
             """.format(era_uri)  # noqa: F841 E501
-        rank_filter = """
+        formations_filter = """
             FILTER (?rank= rock:F)
+            """
+        formations_groups_filter = """
+            FILTER (?rank IN (rock:F, rock:G) )
             """
 
         # CONSTRUCT two graphs, one for upper, one for lower links, add them
@@ -71,13 +66,16 @@ class GraphStore():
         graphs = []
 
         for link in (upper_link, lower_link):
-            construct = construct + link
-
+            use_construct = construct + link
+            use_where = where
             # unless asking for full graph, only return Formation types
             # TODO if upper or lower not of rank Formation, use skos:broader
             # relations until reach a parent Formation
-            if not full:
-                where += rank_filter
+            # TODO rationalise this once we reach a preferred view
+            if not full and not groups:
+                use_where += formations_filter
+            elif groups:
+                use_where += formations_groups_filter
 
             query = """
                 PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
@@ -91,7 +89,7 @@ class GraphStore():
                 }}
                 WHERE {{
                     {1}
-                }}""".format(construct, where)
+                }}""".format(use_construct, use_where)
 
             logging.debug(query)
 

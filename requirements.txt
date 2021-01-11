@@ -1,5 +1,6 @@
 fastapi
 networkx
+pandas
 pydot
 python-Levenshtein
 rdflib
