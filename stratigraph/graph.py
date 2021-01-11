@@ -43,7 +43,7 @@ WHERE {{
 """
 ENDPOINT = 'https://data.bgs.ac.uk/vocprez/endpoint'
 
-# This takes too long on-the-fly each time, should cache
+# This takes a long time on-the-fly, consider cache
 SIMILARITY = Similar()
 
 
@@ -88,6 +88,7 @@ def bounds_texts(url):
 def bounds_links(url, results, graph=None):
     """Accepts a source URL and its upper/lower
     boundary descriptions"""
+    logging.debug(url)
     if not graph:
         graph = rdflib.Graph()
     links = []
@@ -129,7 +130,7 @@ def link_entities(text):
     [{'name': 'foo', 'url': 'http://foo.com'}]
     """
     links = []
-    names = entities(text)
+    names = [e for e in entities(text) if e['type'] == 'LEXICON']
     for name in names:
         link = SIMILARITY.most_similar(name['name'])
         if not link:
