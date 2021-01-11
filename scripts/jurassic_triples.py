@@ -8,7 +8,7 @@ import json
 import pandas as pd
 from rdflib import Graph
 from stratigraph.graph import bounds_texts, bounds_links, \
-        link_entities, triples, SIMILARITY
+        SIMILARITY
 logging.basicConfig(level=logging.DEBUG)
 
 LEX = 'http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/'
