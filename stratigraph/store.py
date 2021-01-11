@@ -30,7 +30,7 @@ class GraphStore():
         construct = """
             ?lex lex:hasYoungestAgeValue ?minAge .
             ?lex lex:hasOldestAgeValue ?maxAge .
-            ?lex lex:hasRockUnitRank ?rank .
+            OPTIONAL { ?lex lex:hasRockUnitRank ?rank }.
             ?era geochron:minAgeValue ?eraMinAge .
             ?era geochron:maxAgeValue ?eraMaxAge .
             ?lex rdfs:label ?label .
