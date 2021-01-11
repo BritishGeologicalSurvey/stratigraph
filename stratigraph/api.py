@@ -35,13 +35,26 @@ app = FastAPI()
 
 
 @app.get("/lex/{code}")
-async def lex_code(code: str, graph=Depends(load_graph)):
+async def lex_code(code: str,
+                   distance: Optional[int] = None,
+                   format: Optional[str] = 'dot',
+                   colours: Optional[str] = 'digmap',
+                   graph=Depends(load_graph)):
     """
     Given a Lexicon code, return a nearby graph.
     Optional distance from the Lexicon term, plus default?
     Optional response format (SVG, ttl, dot etc)? - default?
     """
-    return {}
+    uri = str(LEXICON[code])
+    print(distance)
+    g = graph.graph_from_code(uri, distance=distance)
+
+    if not format or format == 'dot':
+        response = graph_to_dot(g, colour_scale=colours)
+    if format == 'ttl':
+        response = g.serialize(format='ttl')
+
+    return PlainTextResponse(response)
 
 
 @app.get("/era/{code}")
@@ -54,18 +67,22 @@ async def geo_era(code: str,
     """
     Given a Geochron term, return the graph filtered by everything
     that fits inside this geochronological era
+
     Optional 'full' to show all units, defaults
     to only show Formation unit rank.
-    Optional 'format' (TODO: not implemented, default dotfile)
+
+    Optional 'groups' to show both Formation and Group rank
+
+    Optional 'colours' (default 'digmap', or 'age' for ICS colours)
     """
     uri = str(GEOCHRON[code])
     g = graph.graph_by_era(uri, full=full, groups=groups)
 
     logging.debug(g)
-    response = ''
     if not format or format == 'dot':
         response = graph_to_dot(g, colour_scale=colours)
     if format == 'ttl':
         response = g.serialize(format='ttl')
 
     return PlainTextResponse(response)
+    response = ''

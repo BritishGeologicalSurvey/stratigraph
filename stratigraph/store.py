@@ -15,6 +15,11 @@ ENDPOINT = os.environ.get(
     f'http://localhost:3030/{DB}/query')
 
 
+# Nice feature of rdflib to combine graphs with + operator
+def sum_graphs(g1, g2):
+    return g1 + g2
+
+
 class GraphStore():
     """Intended as an abstraction in front of a graph store"""
 
@@ -98,9 +103,35 @@ class GraphStore():
 
             graphs.append(self.try_sparql_query(sparql))
 
-        # Nice feature of rdflib to combine graphs with + operator
-        def sum_graphs(g1, g2):
-            return g1 + g2
+        return reduce(sum_graphs, graphs)
+
+    def graph_from_code(self, uri, distance=None):
+        """Returns the graph surrounding a Lexicode code.
+        Accepts a Linked Data URL and returns linked Lexicon units.
+        Optional 'distance' from the source node by edges
+        (Currently only handles simplest case of distance 1"""
+
+        query = """
+                PREFIX ext: <http://data.bgs.ac.uk/ref/Lexicon/Extended/>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                CONSTRUCT {{
+                    ?link rdfs:label ?label .
+                    <{0}> rdfs:label ?label1 .
+                    ?link {1} <{0}> . }}
+                WHERE {{
+                    ?link rdfs:label ?label .
+                    <{0}> rdfs:label ?label1 .
+                    ?link {1} <{0}> }}
+                """
+        graphs = []
+
+        # Query for upper and lower relations from this URL
+        # TODO based on UX / frontend feedback, what's most useful?
+        # Where would we put a cache? Nicer way to recurse this query?
+        for link in ('ext:upper', 'ext:lower'):
+            sparql = SPARQLWrapper(ENDPOINT)
+            sparql.setQuery(query.format(uri, link))
+            graphs.append(self.try_sparql_query(sparql))
 
         return reduce(sum_graphs, graphs)
 
