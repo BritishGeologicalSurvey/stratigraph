@@ -11,5 +11,11 @@ def test_graph():
 
 def test_era():
     g = GraphStore()
-    graph = g.in_era('Jurassic')
-    assert isinstance(graph, rdflib.Graph)
+    graphJ = g.graph_by_era('http://data.bgs.ac.uk/id/Geochronology/J')
+    assert isinstance(graphJ, rdflib.Graph)
+    graphC = g.graph_by_era('http://data.bgs.ac.uk/id/Geochronology/C')
+    # assert Jurassic and Carboniferous graphs contain different triples
+    assert len(graphJ - graphC) == 0
+    graphNull = g.graph_by_era('http://data.bgs.ac.uk/id/Geochronology/does-not-exist')
+    assert len(graphNull) == 0
+    
