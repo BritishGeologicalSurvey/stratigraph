@@ -4,7 +4,6 @@ from a SPARQL query (within stratigraph.similar)
 """
 import logging
 
-import pandas as pd
 from rdflib import Graph
 from stratigraph.graph import bounds_texts, bounds_links, \
         link_entities, triples
