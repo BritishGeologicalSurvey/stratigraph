@@ -22,7 +22,7 @@ from stratigraph.lex_digmap_colours import COLOURS as DIGMAP_COLOURS
 from stratigraph.lex_age_colours import COLOURS as AGE_COLOURS
 from stratigraph.ns import LEX_EXT
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 COLOURS = {'age': AGE_COLOURS, 'digmap': DIGMAP_COLOURS}
 
