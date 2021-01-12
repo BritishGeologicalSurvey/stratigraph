@@ -48,5 +48,3 @@ def link_entities(text):
 
 if __name__ == '__main__':
     print(bounds_links(bounds_texts()))
-
-

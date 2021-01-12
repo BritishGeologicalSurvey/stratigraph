@@ -88,6 +88,7 @@ class Similar:
 
     def __init__(self):
         self.match_links = self.get_links()
+        self.unmatched = []
 
     def get_links(self):
         """Build a list of names, stopwords removed and originals,
@@ -130,12 +131,17 @@ class Similar:
                 top_match = word
                 top_score = distance
 
+        # Check stop-words don't conflict
         if top_match and name != term:
             name_stop = stopped_word(term)
             matched_stop = stopped_word(top_match[1])
             # Don't return 'Formation' if handed 'Group'
             if name_stop != matched_stop:
                 top_match = None
+
+        # Keep a record of all the unmatched names
+        if not top_match:
+            self.unmatched.append(term)
 
         return top_match
 

@@ -24,6 +24,7 @@ jobs:
         run: |
           pip3 install setuptools>=42.0.0 wheel
           pip3 install -r requirements.txt
-          pip3 install pytest
+          pip3 install pytest flake8
           export PYTHONPATH=.:..
+          python3 -m flake8 stratigraph tests scripts
           python3 -m pytest -vs tests

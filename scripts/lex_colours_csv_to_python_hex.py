@@ -1,11 +1,13 @@
-"""Processing script to convert csv file of lexicon codes and colour values to a pythonhex format.
+"""Processing script to convert csv file of lexicon codes
+and colour values to hex format.
 
 Arguments
 -i or --input_file is the input csv file
 
 Standard output
 
-redirect to a named python file  e.g. stratigraph/lex_age_colours.py from where it can be imported as a static resource in generation of stratigraphic graphs
+redirect to a named python file  e.g. stratigraph/lex_age_colours.py
+where it can be imported as a static resource in generation of graphs
 
 """
 
@@ -50,8 +52,10 @@ def colours_to_python_hex(lex):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('input_file', 
-                    help="name of input csv file mapping lexicon codes to colour values; must contain fields LEX, RED, GREEN, BLUE")
+    parser.add_argument(
+        'input_file',
+        help="""name of input csv file mapping lexicon codes to colour values;
+        must contain fields LEX, RED, GREEN, BLUE""")
     args = parser.parse_args()
     colours = lex_colours(args.input_file)
 #    print(colours_to_json(colours))
