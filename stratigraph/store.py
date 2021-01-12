@@ -48,15 +48,24 @@ class GraphStore():
             OPTIONAL { ?lex ext:lower ?lower }
             """
         age_contains_filter = """
-            FILTER ((?minAge > ?eraMinAge) && (?maxAge < ?eraMaxAge))
-            FILTER (?era = <{0}> )
+            FILTER ( xsd:double(?minAge) > xsd:double(?eraMinAge)
+                && xsd:double(?maxAge) < xsd:double(?eraMaxAge)
+                && ?era = <{0}> 
+            )
             """.format(era_uri)
 
         # age_overlaps_filter provided here but not used yet
         # TODO may want to switch between contains & overlaps?
         age_overlaps_filter = """
-            FILTER ((?eraMaxAge > ?minAge && ?minAge > ?eraMinAge) || (?eraMinAge < ?maxAge || ?maxAge < ?eraMaxAge))
-            FILTER (?era = <{0}> )
+            FILTER ((( xsd:double(?eraMaxAge) >  xsd:double(?minAge) 
+                     &&  xsd:double(?minAge) >  xsd:double(?eraMinAge) 
+                     )
+                    || 
+                    ( xsd:double(?eraMinAge) <  xsd:double(?maxAge) 
+                      ||  xsd:double(?maxAge) < xsd:double(?eraMaxAge))
+                    )
+                    && ?era = <{0}> 
+            )
             """.format(era_uri)  # noqa: F841 E501
         formations_filter = """
             FILTER (?rank= rock:F)
@@ -89,6 +98,7 @@ class GraphStore():
                 PREFIX ext: <http://data.bgs.ac.uk/ref/Lexicon/Extended/>
                 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
                 CONSTRUCT {{
                     {0}
                 }}

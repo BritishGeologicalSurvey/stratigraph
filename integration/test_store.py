@@ -16,7 +16,7 @@ def test_graph_by_era():
     graph = g.graph_by_era(era_uri, full=True)
     all_labels = [str(graph.label(s)) for s in graph.subjects()]  # noqa: E501
 
-    # There SHOULD be fewer labels in the formation list than the all list
+    # There should be fewer labels in the formation list than the all list
     assert len(all_labels) > len(formation_labels)
 
 
