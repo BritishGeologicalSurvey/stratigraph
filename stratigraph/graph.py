@@ -13,7 +13,7 @@ import urllib
 import networkx as nx
 from networkx.drawing.nx_pydot import to_pydot
 import rdflib
-from rdflib import Namespace, URIRef, Literal
+from rdflib import URIRef, Literal
 from rdflib.namespace import RDFS
 from SPARQLWrapper import SPARQLWrapper, JSON
 from stratigraph.corenlp import entities
