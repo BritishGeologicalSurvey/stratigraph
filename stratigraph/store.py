@@ -30,7 +30,7 @@ class GraphStore():
         construct = """
             ?lex lex:hasYoungestAgeValue ?minAge .
             ?lex lex:hasOldestAgeValue ?maxAge .
-            OPTIONAL { ?lex lex:hasRockUnitRank ?rank }.
+            ?lex lex:hasRockUnitRank ?rank .
             ?era geochron:minAgeValue ?eraMinAge .
             ?era geochron:maxAgeValue ?eraMaxAge .
             ?lex rdfs:label ?label .
@@ -43,7 +43,7 @@ class GraphStore():
             OPTIONAL { ?lex ext:lower ?lower }
             """
         age_contains_filter = """
-            FILTER (xsd:double(?minAge) > xsd:double(?eraMinAge)
+            FILTER ( xsd:double(?minAge) > xsd:double(?eraMinAge)
                 && xsd:double(?maxAge) < xsd:double(?eraMaxAge)
                 && ?era = <{0}> 
             )
@@ -93,6 +93,7 @@ class GraphStore():
                 PREFIX ext: <http://data.bgs.ac.uk/ref/Lexicon/Extended/>
                 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
                 CONSTRUCT {{
                     {0}
                 }}
