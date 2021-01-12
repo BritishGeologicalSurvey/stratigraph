@@ -52,7 +52,7 @@ def test_ttl_to_nx():
     nx_graph_digmap = ttl_to_nx(triples=triples)
     assert nx.is_isomorphic(nx_graph_digmap, nx_graph_age)
 
-    # Check graphs created with different colour scale are are different when
+    # Check graphs created with different colour scale are different when
     # also comparing attributes
     nm = iso.categorical_node_match('fillcolor', '#EEEEEE')
     assert not nx.is_isomorphic(nx_graph_digmap, nx_graph_age, node_match=nm)
