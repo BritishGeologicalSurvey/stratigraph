@@ -16,4 +16,3 @@ def test_graph_by_era():
     assert isinstance(graphJ, rdflib.Graph)
     formation_labels_J = [str(graphJ.label(s)) for s in graphJ.subjects()]  # noqa: E501
     assert 'Kimmeridge Clay Formation' in formation_labels_J
-
