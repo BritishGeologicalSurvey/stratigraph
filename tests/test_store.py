@@ -9,13 +9,11 @@ def test_graph():
     assert g
 
 
-def test_era():
+def test_graph_by_era():
     g = GraphStore()
-    graphJ = g.graph_by_era('http://data.bgs.ac.uk/id/Geochronology/J')
+    #test selection for Jurassic
+    graphJ = g.graph_by_era('http://data.bgs.ac.uk/id/Geochronology/Division/J')
     assert isinstance(graphJ, rdflib.Graph)
-    graphC = g.graph_by_era('http://data.bgs.ac.uk/id/Geochronology/C')
-    # assert Jurassic and Carboniferous graphs contain different triples
-    assert len(graphJ - graphC) == 0
-    graphNull = g.graph_by_era('http://data.bgs.ac.uk/id/Geochronology/does-not-exist')
-    assert len(graphNull) == 0
-    
+    formation_labels_J = [str(graphJ.label(s)) for s in graphJ.subjects()]  # noqa: E501
+    assert 'Kimmeridge Clay Formation' in formation_labels_J
+
