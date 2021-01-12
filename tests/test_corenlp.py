@@ -12,12 +12,14 @@ DEBUG_SAMPLE = "Bibliographic reference: Green, D.W. 1992. Bristol and Glouceste
 @patch("stratigraph.corenlp.SERVER", "http://localhost:1234")
 def test_tokens_exception():
     with pytest.raises(ConnectionError):
-         tokens(SAMPLE)
+        tokens(SAMPLE)
+
 
 def test_tokens_works():
     result = tokens(SAMPLE)
     assert isinstance(result, dict)
     assert 'sentences' in result
+
 
 def test_entities():
     entity_doc = entities(SAMPLE)
