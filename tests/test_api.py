@@ -11,7 +11,7 @@ class MockGraph(MagicMock):
     # Mock interface to the graph store.
     # Later, mock more actual responses
 
-    def graph_by_era(*args):
+    def graph_by_era(*args, **kwargs):
         graph = rdflib.Graph()
         dummy = os.path.join(os.path.dirname(__file__),
                              '../data/jurassic_tm.ttl')
