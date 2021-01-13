@@ -1,0 +1,337 @@
+[
+  [
+    "Abbotsgrange Silt",
+    "Abbotsgrange Silt Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/AGSI"
+  ],
+  [
+    "Ashton Shale",
+    "Ashton Shale Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/S260"
+  ],
+  [
+    "Bacton Green Till",
+    "Bacton Green Till Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BGTI"
+  ],
+  [
+    "Belemnite Sands",
+    "Belemnite Sands Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BSSK"
+  ],
+  [
+    "Bellshill Clay",
+    "Bellshill Clay Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BILL"
+  ],
+  [
+    "Bindon Sandstone",
+    "Bindon Sandstone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BDNS"
+  ],
+  [
+    "Bishop's Frome Limestone",
+    "Bishop's Frome Limestone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BFLS"
+  ],
+  [
+    "Buxton Rock",
+    "Buxton Rock Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/BUR"
+  ],
+  [
+    "Cardingmill Grit",
+    "Cardingmill Grit Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CDDG"
+  ],
+  [
+    "Claret Clay",
+    "Claret Clay Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CTCL"
+  ],
+  [
+    "Combe Martin Slates",
+    "Combe Martin Slates Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CMSL"
+  ],
+  [
+    "Cradley Silts",
+    "Cradley Silts Bed",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CRSI"
+  ],
+  [
+    "Crockanaver Limestone",
+    "Crockanaver Limestone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/CRVL"
+  ],
+  [
+    "Doldowlod Conglomerate",
+    "Doldowlod Conglomerate Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/DD"
+  ],
+  [
+    "Douglas Muir Quartz-Conglomerate",
+    "Douglas Muir Quartz-Conglomerate Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/DMQ"
+  ],
+  [
+    "Drumowen Sandstone",
+    "Drumowen Sandstone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/DRMS"
+  ],
+  [
+    "Erskine Clay",
+    "Erskine Clay Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ERSK"
+  ],
+  [
+    "Forse Till",
+    "Forse Till Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FOTI"
+  ],
+  [
+    "Forties Sandstone",
+    "Forties Sandstone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FORS"
+  ],
+  [
+    "Frodingham Ironstone",
+    "Frodingham Ironstone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FI"
+  ],
+  [
+    "Fuller's Earth Rock",
+    "Fuller's Earth Rock Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FER"
+  ],
+  [
+    "Garantiana Mudstone",
+    "Garantiana Mudstone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GASH"
+  ],
+  [
+    "Glyn Gower Siltstones",
+    "Glyn Gower Siltstones Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GYG"
+  ],
+  [
+    "Gravel Caverns Conglomerate",
+    "Gravel Caverns Conglomerate Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GCC"
+  ],
+  [
+    "Gutterfoot Sand",
+    "Gutterfoot Sand Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/GFSA"
+  ],
+  [
+    "Happisburgh Till",
+    "Happisburgh Till Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HPTI"
+  ],
+  [
+    "Hetton Beck Limestone",
+    "Hetton Beck Limestone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HBEL"
+  ],
+  [
+    "Hinton St Mary Clay",
+    "Hinton St Mary Clay Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HSM"
+  ],
+  [
+    "Huckster Conglomerate",
+    "Huckster Conglomerate Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HCG"
+  ],
+  [
+    "Kentisbury Slates",
+    "Kentisbury Slates Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KSL"
+  ],
+  [
+    "Kinneil Kerse Silt",
+    "Kinneil Kerse Silt Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KKSI"
+  ],
+  [
+    "Letham Silt",
+    "Letham Silt Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LESI"
+  ],
+  [
+    "Linwood Clay",
+    "Linwood Clay Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LIWD"
+  ],
+  [
+    "Little Wenlock Basalt",
+    "Little Wenlock Basalt Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LWKB"
+  ],
+  [
+    "Lower Cornbrash",
+    "Lower Cornbrash Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LCB"
+  ],
+  [
+    "Lytchett Matravers Sand",
+    "Lytchett Matravers Sand Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/LYMS"
+  ],
+  [
+    "Miller's Dale",
+    "Miller's Dale Beds",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H1686"
+  ],
+  [
+    "Millstone Point Sandstone",
+    "Millstone Point Sandstone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/MPS"
+  ],
+  [
+    "Millstone Point Sandstones",
+    "Millstone Point Sandstones Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H4801"
+  ],
+  [
+    "Newton Clay",
+    "Newton Clay Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/NEC"
+  ],
+  [
+    "Nothe Grit",
+    "Nothe Grit Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/NGT"
+  ],
+  [
+    "Paisley Clay",
+    "Paisley Clay Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PAIS"
+  ],
+  [
+    "Parkstone Clay",
+    "Parkstone Clay Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PKC"
+  ],
+  [
+    "Parkstone Sand",
+    "Parkstone Sand Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PKS"
+  ],
+  [
+    "Plumpe Farm Sand",
+    "Plumpe Farm Sand Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PFS"
+  ],
+  [
+    "Poltimore Mudstone",
+    "Poltimore Mudstone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/POM"
+  ],
+  [
+    "Portland Freestone",
+    "Portland Freestone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/POFR"
+  ],
+  [
+    "Purple Sandstone",
+    "Purple Sandstone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PRS"
+  ],
+  [
+    "Pylle Clay",
+    "Pylle Clay Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PYC"
+  ],
+  [
+    "Reculver Sand",
+    "Reculver Sand Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/RCLV"
+  ],
+  [
+    "Saltford Shale",
+    "Saltford Shale Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SASH"
+  ],
+  [
+    "Sandsfoot Grit",
+    "Sandsfoot Grit Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SFG"
+  ],
+  [
+    "Shaftesbury Sandstone",
+    "Shaftesbury Sandstone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SHYS"
+  ],
+  [
+    "Shenley Limestone",
+    "Shenley Limestone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SHEN"
+  ],
+  [
+    "Slackgun Volcaniclastic",
+    "Slackgun Volcaniclastic Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SLAV"
+  ],
+  [
+    "Spargrove Limestone",
+    "Spargrove Limestone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SPLI"
+  ],
+  [
+    "Stob Quartzite",
+    "Stob Quartzite Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/STBQ"
+  ],
+  [
+    "Stubble Green Silt",
+    "Stubble Green Silt Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SGSI"
+  ],
+  [
+    "Teal Sandstone",
+    "Teal Sandstone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TEAS"
+  ],
+  [
+    "Todber Freestone",
+    "Todber Freestone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TOF"
+  ],
+  [
+    "Totternhoe Stone",
+    "Totternhoe Stone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TTST"
+  ],
+  [
+    "Upper Cornbrash",
+    "Upper Cornbrash Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/UCB"
+  ],
+  [
+    "Upper Plateau",
+    "Upper Plateau Beds Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/UPLB"
+  ],
+  [
+    "Upper Spilsby Sandstone",
+    "Upper Spilsby Sandstone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/USPS"
+  ],
+  [
+    "Weisdale Limestone",
+    "Weisdale Limestone Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/WEIL"
+  ],
+  [
+    "Weybourne Town Till",
+    "Weybourne Town Till Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/WTTI"
+  ],
+  [
+    "Wilderness",
+    "Wilderness Member",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H611"
+  ]
+]
