@@ -29,6 +29,7 @@ def test_code():
     code = 'MMG'
     response = client.get(f"/lex/{code}")
     assert response.status_code == 200
+    assert 'digraph' in str(response.content)
 
 
 def test_era():
