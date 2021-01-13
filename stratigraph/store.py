@@ -15,6 +15,11 @@ ENDPOINT = os.environ.get(
     f'http://localhost:3030/{DB}/query')
 
 
+# Nice feature of rdflib to combine graphs with + operator
+def sum_graphs(g1, g2):
+    return g1 + g2
+
+
 class GraphStore():
     """Intended as an abstraction in front of a graph store"""
 
@@ -108,9 +113,30 @@ class GraphStore():
 
             graphs.append(self.try_sparql_query(sparql))
 
-        # Nice feature of rdflib to combine graphs with + operator
-        def sum_graphs(g1, g2):
-            return g1 + g2
+        return reduce(sum_graphs, graphs)
+
+    def graph_all(self):
+        """Returns the graph of all upper/lower boundary links"""
+
+        query = """
+                PREFIX ext: <http://data.bgs.ac.uk/ref/Lexicon/Extended/>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                CONSTRUCT {{
+                    ?link rdfs:label ?label .
+                    ?subject rdfs:label ?label1 .
+                    ?link {0} ?subject . }}
+                WHERE {{
+                    ?link rdfs:label ?label .
+                    ?subject rdfs:label ?label1 .
+                    ?link {0} ?subject }}
+                """
+        graphs = []
+
+        # Query for upper and lower relations in the whole Lexicon
+        for link in ('ext:upper', 'ext:lower'):
+            sparql = SPARQLWrapper(ENDPOINT)
+            sparql.setQuery(query.format(link))
+            graphs.append(self.try_sparql_query(sparql))
 
         return reduce(sum_graphs, graphs)
 
