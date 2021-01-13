@@ -115,32 +115,27 @@ class GraphStore():
 
         return reduce(sum_graphs, graphs)
 
-    def graph_from_code(self, uri, distance=None):
-        """Returns the graph surrounding a Lexicode code.
-        Accepts a Linked Data URL and returns linked Lexicon units.
-        Optional 'distance' from the source node by edges
-        (Currently only handles simplest case of distance 1"""
+    def graph_all(self):
+        """Returns the graph of all upper/lower boundary links"""
 
         query = """
                 PREFIX ext: <http://data.bgs.ac.uk/ref/Lexicon/Extended/>
                 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
                 CONSTRUCT {{
                     ?link rdfs:label ?label .
-                    <{0}> rdfs:label ?label1 .
-                    ?link {1} <{0}> . }}
+                    ?subject rdfs:label ?label1 .
+                    ?link {0} ?subject . }}
                 WHERE {{
                     ?link rdfs:label ?label .
-                    <{0}> rdfs:label ?label1 .
-                    ?link {1} <{0}> }}
+                    ?subject rdfs:label ?label1 .
+                    ?link {0} ?subject }}
                 """
         graphs = []
 
-        # Query for upper and lower relations from this URL
-        # TODO based on UX / frontend feedback, what's most useful?
-        # Where would we put a cache? Nicer way to recurse this query?
+        # Query for upper and lower relations in the whole Lexicon
         for link in ('ext:upper', 'ext:lower'):
             sparql = SPARQLWrapper(ENDPOINT)
-            sparql.setQuery(query.format(uri, link))
+            sparql.setQuery(query.format(link))
             graphs.append(self.try_sparql_query(sparql))
 
         return reduce(sum_graphs, graphs)

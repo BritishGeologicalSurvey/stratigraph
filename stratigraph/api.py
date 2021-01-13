@@ -14,7 +14,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import PlainTextResponse
 from stratigraph.store import GraphStore
 from stratigraph.graph import graph_to_dot
-from stratigraph.ns import GEOCHRON, LEXICON
+from stratigraph.ns import GEOCHRON
 
 logging.basicConfig(level=logging.INFO)
 
@@ -34,20 +34,16 @@ def load_graph():
 app = FastAPI()
 
 
-@app.get("/lex/{code}")
-async def lex_code(code: str,
-                   distance: Optional[int] = None,
-                   format: Optional[str] = 'dot',
+@app.get("/lex/")
+async def lex_code(format: Optional[str] = 'dot',
                    colours: Optional[str] = 'digmap',
                    graph=Depends(load_graph)):
     """
-    Given a Lexicon code, return a nearby graph.
-    Optional distance from the Lexicon term, plus default?
-    Optional response format (SVG, ttl, dot etc)? - default?
+    Return ALL the text mined Lexicon links
+    Optional response format (ttl, dot) - default dot
+    Optional colour scheme (digmap, age) - default digmap
     """
-    uri = str(LEXICON[code])
-    print(distance)
-    g = graph.graph_from_code(uri, distance=distance)
+    g = graph.graph_all()
 
     if not format or format == 'dot':
         response = graph_to_dot(g, colour_scale=colours)

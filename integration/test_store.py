@@ -2,7 +2,7 @@
 Currently depends on having Fuseki locally with fixtures."""
 
 from stratigraph.store import GraphStore
-from stratigraph.ns import GEOCHRON, LEXICON
+from stratigraph.ns import GEOCHRON
 
 
 def test_graph_by_era():
@@ -22,8 +22,7 @@ def test_graph_by_era():
 
 def test_graph_from_code():
     g = GraphStore()
-    code_uri = str(LEXICON.BROM)
-    graph = g.graph_from_code(code_uri)
+    graph = g.graph_all()
     formation_labels = [str(graph.label(s)) for s in graph.subjects()]  # noqa: E501
     assert 'Rannoch Formation' in formation_labels
 
