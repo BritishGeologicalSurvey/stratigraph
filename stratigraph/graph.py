@@ -26,7 +26,11 @@ logging.basicConfig(level=logging.INFO)
 
 COLOURS = {'age': AGE_COLOURS, 'digmap': DIGMAP_COLOURS}
 
-QUERY = """
+ENDPOINT = 'https://data.bgs.ac.uk/vocprez/endpoint'
+
+# Queries to run against data.bgs.ac.uk SPARQL endpoint
+
+URL_TEXTS = """
 PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT ?upper ?lower ?label
@@ -35,13 +39,24 @@ WHERE {{
    <{0}> lex:hasLowerBoundaryDefinition ?lower .
    <{0}> rdfs:label ?label }}
 """
-QUERY_LABEL = """
+
+URL_LABEL = """
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT ?label
 WHERE {{
    <{0}> rdfs:label ?label }}
 """
-ENDPOINT = 'https://data.bgs.ac.uk/vocprez/endpoint'
+
+ALL_TEXTS = """
+PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?upper ?lower ?url ?label
+WHERE {{
+   ?url lex:hasUpperBoundaryDefinition ?upper .
+   ?url lex:hasLowerBoundaryDefinition ?lower .
+   ?url rdfs:label ?label }}
+"""
+
 
 # This takes a long time on-the-fly, consider cache
 SIMILARITY = Similar()
@@ -54,7 +69,7 @@ def bounds_texts(url):
     If not found, just return the text label for the link
     """
     sparql = SPARQLWrapper(ENDPOINT)
-    sparql.setQuery(QUERY.format(url))
+    sparql.setQuery(URL_TEXTS.format(url))
     sparql.setReturnFormat(JSON)
     results = {}
     try:
@@ -70,7 +85,7 @@ def bounds_texts(url):
     # First query returns upper, lower, label
     # If it's empty, still request the label
     if not results:
-        sparql.setQuery(QUERY_LABEL.format(url))
+        sparql.setQuery(URL_LABEL.format(url))
         sparql.setReturnFormat(JSON)
         try:
             results = sparql.query().convert()
@@ -81,6 +96,25 @@ def bounds_texts(url):
             # TODO HTTPS connections sometimes drop - why?
             logging.error(err)
             logging.info(url)
+
+    return results
+
+
+def all_texts():
+    """
+    Query data.bgs.ac.uk for all upper/lower boundary descriptions.
+    """
+    sparql = SPARQLWrapper(ENDPOINT)
+    sparql.setQuery(ALL_TEXTS)
+    sparql.setReturnFormat(JSON)
+    results = {}
+    try:
+        results = sparql.query().convert()
+        # might be empty
+        results = results['results']['bindings']
+
+    except (ConnectionResetError, urllib.error.URLError) as err:
+        logging.error(err)
 
     return results
 
