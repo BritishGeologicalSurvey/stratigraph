@@ -181,8 +181,8 @@
   ],
   [
     "Miller's Dale",
-    "Miller's Dale Beds",
-    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H1686"
+   " Upper Miller's Dale Lava Member"
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/UMB"
   ],
   [
     "Millstone Point Sandstone",
@@ -331,7 +331,7 @@
   ],
   [
     "Wilderness",
-    "Wilderness Member",
-    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H611"
+    "Wilderness Till Formation",
+    "http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/WITI"
   ]
 ]
