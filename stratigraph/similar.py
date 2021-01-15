@@ -67,6 +67,21 @@ def stopped_word(term):
     return stopped
 
 
+def remove_surplus_chars(term):
+    """
+    Remove common strings that cause frequent match failures.
+    * Annotations in square brackets in the literal Lexicon names
+    * Annotations in round brackets in the middle of terms from text
+    * As above, with a single bracket until the end of term
+    * Surplus whitespace around '-' (common for Welsh names)
+    """
+    term = re.sub(r' \[.*\]', '', term)
+    term = re.sub(r' \(.*\)', '', term)
+    term = re.sub(r' \([^\)]+$', '', term)
+    term = term.replace(' - ', '-')
+    return term
+
+
 def concept_index():
     """Create a name -> link mapping with a SPARQL query.
     We run this against the SPARQL endpoint at data.bgs.ac.uk
@@ -96,6 +111,7 @@ class Similar:
         match_links = []
         for row in concept_index():
             short = remove_stop_words(row[0])
+            short = remove_surplus_chars(short)
             row = [short] + row
             match_links.append(row)
         return match_links
@@ -122,6 +138,7 @@ class Similar:
         """
         logging.debug(term)
         name = remove_stop_words(term)
+        name = remove_surplus_chars(name)
 
         top_score = 0
         top_match = None
