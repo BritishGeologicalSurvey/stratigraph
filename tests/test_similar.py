@@ -1,6 +1,6 @@
 import pytest
 from stratigraph.similar import remove_stop_words, Similar, \
-        stopped_word, concept_index
+        stopped_word, concept_index, remove_surplus_chars
 
 
 @pytest.fixture
@@ -17,6 +17,18 @@ def test_remove_stop():
 def test_stopped():
     s = 'Patrick Burn Formation'
     assert 'Formation' in stopped_word(s)
+
+
+def test_surplus():
+    obsolete = 'Keuper Marl And Sandstone [Obsolete Name And Code: Use MMG And SSG]'  # noqa: E501
+    extra = 'Cumbrian Coast Group ( St Bees Evaporites'
+    annotated = 'Aegiranum ( Skelton ) Marine Band'
+    dashspace = 'Allt - y - Clych Conglomerate'
+
+    assert remove_surplus_chars(obsolete) == 'Keuper Marl And Sandstone'
+    assert remove_surplus_chars(extra) == 'Cumbrian Coast Group'
+    assert remove_surplus_chars(annotated) == 'Aegiranum Marine Band'
+    assert remove_surplus_chars(dashspace) == 'Allt-y-Clych Conglomerate'
 
 
 def test_stoppable(similar):
