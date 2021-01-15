@@ -35,11 +35,11 @@ CONSTRUCT = """
             """
 
 FILTER = """
-            FILTER ((?minAge > ?eraMinAge) && (?maxAge < ?eraMaxAge))
-            FILTER (?era = <http://data.bgs.ac.uk/id/Geochronology/Division/J> )
-            """
+         FILTER ((?minAge > ?eraMinAge) && (?maxAge < ?eraMaxAge))
+         FILTER (?era = <http://data.bgs.ac.uk/id/Geochronology/Division/J> )
+         """
 
-WHERE = CONSTRUCT+FILTER
+WHERE = CONSTRUCT + FILTER
 
 QUERY = """PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
            PREFIX geochron: <http://data.bgs.ac.uk/ref/Geochronology/>
@@ -48,7 +48,6 @@ QUERY = """PREFIX lex: <http://data.bgs.ac.uk/ref/Lexicon/>
                 {0}
             }}
             WHERE {{ {1}}}""".format(CONSTRUCT, WHERE)
-
 
 
 def create_db(name=DBNAME):
@@ -77,9 +76,9 @@ def add_sparql_data():
     data = results.serialize(format='nt')
 
     status = requests.put(
-            urljoin(FUSEKI_HOST, f'{DBNAME}/data?default'),
-            headers={'Content-type': 'application/n-triples'},
-            data=data)
+        urljoin(FUSEKI_HOST, f'{DBNAME}/data?default'),
+        headers={'Content-type': 'application/n-triples'},
+        data=data)
     status.raise_for_status()
 
 
@@ -88,9 +87,9 @@ def add_local_data():
     with open('./data/jurassic_tm.ttl', 'r') as infile:
         jurassic = infile.read()
         status = requests.post(
-                urljoin(FUSEKI_HOST, f'{DBNAME}/data?default'),
-                headers={'Content-type': 'text/turtle'},
-                data=jurassic)
+            urljoin(FUSEKI_HOST, f'{DBNAME}/data?default'),
+            headers={'Content-type': 'text/turtle'},
+            data=jurassic)
         status.raise_for_status()
 
 

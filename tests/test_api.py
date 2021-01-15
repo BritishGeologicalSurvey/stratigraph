@@ -25,10 +25,10 @@ async def load_test_graph():
 app.dependency_overrides[load_graph] = load_test_graph
 
 
-def test_code():
-    code = 'MMG'
-    response = client.get(f"/lex/{code}")
+def test_lex():
+    response = client.get("/lex/")
     assert response.status_code == 200
+    assert 'digraph' in str(response.content)
 
 
 def test_era():
