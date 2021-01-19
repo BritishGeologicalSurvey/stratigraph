@@ -34,7 +34,7 @@ def load_graph():
 app = FastAPI()
 
 
-@app.get("/lex/")
+@app.get("/stratigraph/lex/")
 async def lex_code(format: Optional[str] = 'dot',
                    colours: Optional[str] = 'digmap',
                    graph=Depends(load_graph)):
@@ -53,7 +53,7 @@ async def lex_code(format: Optional[str] = 'dot',
     return PlainTextResponse(response)
 
 
-@app.get("/era/{code}")
+@app.get("/stratigraph/era/{code}")
 async def geo_era(code: str,
                   full: bool = False,
                   groups: bool = False,
