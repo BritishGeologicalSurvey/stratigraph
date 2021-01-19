@@ -16,6 +16,13 @@ See the instructions in that project for [Running CoreNLP in docker](https://git
 
 ## Running the application
 
+Kill any existing containers using port 80 or 3030 
+
+```
+docker container ls
+docker rm -f <container-name>
+```
+
 ```
 docker-compose up -d
 ```
