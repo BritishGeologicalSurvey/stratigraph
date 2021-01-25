@@ -26,13 +26,13 @@ app.dependency_overrides[load_graph] = load_test_graph
 
 
 def test_lex():
-    response = client.get("/lex/")
+    response = client.get("/stratigraph/lex/")
     assert response.status_code == 200
     assert 'digraph' in str(response.content)
 
 
 def test_era():
     name = 'Carboniferous'
-    response = client.get(f"/era/{name}")
+    response = client.get(f"/stratigraph/era/{name}")
     assert response.status_code == 200
     assert 'digraph' in str(response.content)

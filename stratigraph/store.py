@@ -23,7 +23,8 @@ def sum_graphs(g1, g2):
 class GraphStore():
     """Intended as an abstraction in front of a graph store"""
 
-    def graph_by_era(self, era_uri, full=False, groups=False):
+    def graph_by_era(self, era_uri, full=False, groups=False,
+                     orphan_nodes=False):
         """
         Accepts the URI for a geochron concept
         Retrieves the upper/lower boundary relations

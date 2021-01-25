@@ -12,3 +12,5 @@
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SFG> rdfs:label "Sandsfoot Grit Member" .
 
 <http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KC> rdfs:label "Kimmeridge Clay Formation" .
+
+<http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/NULL> rdfs:label "Null Formation" .
