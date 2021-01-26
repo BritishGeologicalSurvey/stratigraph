@@ -12,11 +12,22 @@ py.test
 
 The scripts and tests depend on having Stanford CoreNLP Server with the BGS custom model for Lexicon and Geochronology named entity recognition.
 
-See the instructions in that project for [Running CoreNLP in docker](https://github.com/BritishGeologicalSurvey/geo-ner-model#running-in-docker) using our docker image in Github Container Registry. This requires authentication; see also (https://docs.github.com/en/free-pro-team@latest/packages/getting-started-with-github-container-registry/migrating-to-github-container-registry-for-docker-images#authenticating-with-the-container-registry)[authenticating with the Github Container Registry]
+See the instructions in that project for [Running CoreNLP in docker](https://github.com/BritishGeologicalSurvey/geo-ner-model#running-in-docker) using our docker image in Github Container Registry. As of writing, this requires authentication with a personal access token associated with a Github account; please see [authenticating with the Github Container Registry](https://docs.github.com/en/free-pro-team@latest/packages/getting-started-with-github-container-registry/migrating-to-github-container-registry-for-docker-images#authenticating-with-the-container-registry) for detail. The summary is as follows:
+
+* [Create a Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with rights to `read:packages`; once logged in, start at [Developer Settings/Tokens](https://github.com/settings/tokens)
+
+747c1e0ae5e50472e318934398b88d68a8b12ae0
+* Use the personal access token to `docker login` before pulling down the image:
+```
+ export CR_PAT=YOUR_TOKEN
+ echo $CR_PAT | docker login docker.pkg.github.com -u USERNAME --password-stdin
+ ...
+ docker pull docker.pkg.github.com/britishgeologicalsurvey/geo-ner-model/corenlp:v0.3
+```
 
 ## Running the application
 
-Kill any existing containers using port 80 or 3030 
+Kill any existing containers using port 80 or 3030
 
 ```
 docker container ls
