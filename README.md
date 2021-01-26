@@ -16,7 +16,6 @@ See the instructions in that project for [Running CoreNLP in docker](https://git
 
 * [Create a Personal Access Token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) with rights to `read:packages`; once logged in, start at [Developer Settings/Tokens](https://github.com/settings/tokens)
 
-747c1e0ae5e50472e318934398b88d68a8b12ae0
 * Use the personal access token to `docker login` before pulling down the image:
 ```
  export CR_PAT=YOUR_TOKEN
