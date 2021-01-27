@@ -88,3 +88,4 @@ def test_graph_to_dot():
     # read it back in when sending via the API?
     dot = graph_to_dot(graph=graph)
     assert 'data.bgs.ac.uk' in dot
+    assert 'id=' in dot
