@@ -34,7 +34,7 @@ def load_graph():
 app = FastAPI()
 
 
-@app.get("/lex/")
+@app.get("/stratigraph/lex/")
 async def lex_code(format: Optional[str] = 'dot',
                    colours: Optional[str] = 'digmap',
                    graph=Depends(load_graph)):
@@ -53,10 +53,11 @@ async def lex_code(format: Optional[str] = 'dot',
     return PlainTextResponse(response)
 
 
-@app.get("/era/{code}")
+@app.get("/stratigraph/era/{code}")
 async def geo_era(code: str,
                   full: bool = False,
                   groups: bool = False,
+                  orphans: bool = False,
                   format: Optional[str] = 'dot',
                   colours: Optional[str] = 'digmap',
                   graph=Depends(load_graph)):
@@ -70,9 +71,11 @@ async def geo_era(code: str,
     Optional 'groups' to show both Formation and Group rank
 
     Optional 'colours' (default 'digmap', or 'age' for ICS colours)
+
+    Optional 'orphans' (default False) - show detached nodes
     """
     uri = str(GEOCHRON[code])
-    g = graph.graph_by_era(uri, full=full, groups=groups)
+    g = graph.graph_by_era(uri, full=full, groups=groups, orphan_nodes=orphans)
 
     logging.debug(g)
     if not format or format == 'dot':

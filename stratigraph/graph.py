@@ -175,10 +175,14 @@ def link_entities(text):
     return links
 
 
-def ttl_to_nx(graph=None, triples=None, colour_scale='digmap'):
+def ttl_to_nx(graph=None,
+              triples=None,
+              colour_scale='digmap',
+              orphan_nodes=True):
     """Accepts either an rdflib graph, or a file with triples in .ttl form
     Accepts either digmap or age for colour scale used for the graph
-    Returns a NetworkX graph based on the contents."""
+    Returns a NetworkX graph based on the contents.
+    Optional orphan_nodes - if False only show nodes with links"""
 
     # Empty graph object will still evaluate False.
     # If no triples to parse either, it raises ValueError
@@ -194,6 +198,7 @@ def ttl_to_nx(graph=None, triples=None, colour_scale='digmap'):
             logging.error(err)
 
     gdot = nx.DiGraph()
+    colours = COLOURS.get(colour_scale, {})
 
     # Get all URLs for Lexicon terms in our graph
     subjects = set([url for url in graph.subjects()])
@@ -204,15 +209,19 @@ def ttl_to_nx(graph=None, triples=None, colour_scale='digmap'):
             continue
 
         # Node attributes should be added when calling add_node
-        # We add the URL and also want the node colour.
-        # Not all Lexicon codes have DigMap colours, however - default to pale
-        # grey
-        colours = COLOURS.get(colour_scale, {})
-        colour = colours.get(str(url), '#EEEEEE')
-        gdot.add_node(label, url=str(url), style='filled', fillcolor=colour)
 
         uppers = [str(graph.label(t[2])) for t in graph.triples([url, LEX_EXT['upper'], None])]  # noqa: E501
         lowers = [str(graph.label(t[2])) for t in graph.triples([url, LEX_EXT['lower'], None])]  # noqa: E501
+
+        # If orphan_nodes is False, only add node if we have edges.
+        if (not uppers and not lowers) and not orphan_nodes:
+            continue
+
+        # We add the URL and also want the node colour.
+        # Not all Lexicon codes have DigMap colours, however - default to pale
+        # grey
+        colour = colours.get(str(url), '#EEEEEE')
+        gdot.add_node(label, url=str(url), style='filled', fillcolor=colour)
 
         for strat in uppers:
             # don't add self-referential edges

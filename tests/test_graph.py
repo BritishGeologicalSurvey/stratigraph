@@ -55,9 +55,13 @@ def test_ttl_to_nx():
     nx_graph = ttl_to_nx(graph=graph)
     assert not is_empty(nx_graph)
 
-    # Case in which we only supply some triples
+    # Case in which we only supply triples, not graph
     nx_graph = ttl_to_nx(triples=triples)
     assert not is_empty(nx_graph)
+
+    # Case in which we include orphaned nodes
+    nx_full_graph = ttl_to_nx(triples=triples, orphan_nodes=False)
+    assert nx_full_graph.number_of_nodes() < nx_graph.number_of_nodes()
 
     # Case in which we use the age colour scale
     nx_graph_age = ttl_to_nx(triples=triples, colour_scale='age')

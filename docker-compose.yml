@@ -11,3 +11,12 @@ services:
     ports:
       - 3030:3030
     restart: unless-stopped
+
+  api:
+    image: bgs/strat
+    build: .
+    environment:
+      - ENDPOINT=http://fuseki:3030/stratigraph/query
+    ports:
+      - 80:80
+
