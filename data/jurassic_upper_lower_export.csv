@@ -1,4 +1,4 @@
-Name,Code,URI,relationship,related_name,related_Code,related_uri
+lex_name,lex_code,lex_uri,bounary_type,bounding_lex_name,bounding_lex_code,bounding_lex_uri
 Pabay Shale Formation   ,PABS,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PABS,lower,Ardnish Formation,ADS,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ADS
 Fenland Formation   ,FEND,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FEND,lower,Ampthill Clay Formation,AMC,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/AMC
 Hunstanton Formation   ,HUCK,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HUCK,lower,Coralline Oolite Formation,COO,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/COO
