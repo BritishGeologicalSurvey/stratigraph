@@ -1,10 +1,11 @@
-Pabay Shale Formation   ,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PABS,lower,Ardnish Formation,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ADS
-Fenland Formation   ,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FEND,lower,Ampthill Clay Formation,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/AMC
-Hunstanton Formation   ,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HUCK,lower,Coralline Oolite Formation,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/COO
-Hunstanton Formation   ,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HUCK,lower,Kellaways Formation,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KLB
-Tealby Formation   ,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TBF,lower,Sandringham Sand Formation,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SAS
-Lower Greensand   ,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H1024,lower,Haddenham Formation,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HADD
-Ardnish Formation,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ADS,upper,Pabay Shale Formation   ,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PABS
-Ampthill Clay Formation,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/AMC,upper,Fenland Formation   ,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FEND
-Coralline Oolite Formation,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/COO,upper,Hunstanton Formation   ,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HUCK
-Kellaways Formation,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KLB,upper,Hunstanton Formation   ,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HUCK
+Name,Code,URI,relationship,related_name,related_Code,related_uri
+Pabay Shale Formation   ,PABS,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PABS,lower,Ardnish Formation,ADS,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ADS
+Fenland Formation   ,FEND,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FEND,lower,Ampthill Clay Formation,AMC,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/AMC
+Hunstanton Formation   ,HUCK,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HUCK,lower,Coralline Oolite Formation,COO,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/COO
+Hunstanton Formation   ,HUCK,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HUCK,lower,Kellaways Formation,KLB,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KLB
+Tealby Formation   ,TBF,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/TBF,lower,Sandringham Sand Formation,SAS,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/SAS
+Lower Greensand   ,H1024,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/H1024,lower,Haddenham Formation,HADD,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HADD
+Ardnish Formation,ADS,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/ADS,upper,Pabay Shale Formation   ,PABS,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PABS
+Ampthill Clay Formation,AMC,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/AMC,upper,Fenland Formation   ,FEND,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/FEND
+Coralline Oolite Formation,COO,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/COO,upper,Hunstanton Formation   ,HUCK,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HUCK
+Kellaways Formation,KLB,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/KLB,upper,Hunstanton Formation   ,HUCK,http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/HUCK
