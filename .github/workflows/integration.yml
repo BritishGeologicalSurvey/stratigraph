@@ -27,7 +27,7 @@ jobs:
 
     # Service containers to run with `container-job`
     services:
-      # Label used to access the service container
+      # Apache Jena Fuseki for external SPARQL endpoint
       fuseki:
         # Docker Hub image
         image: stain/jena-fuseki
@@ -35,3 +35,11 @@ jobs:
           ADMIN_PASSWORD: admin
         ports:
           - 3030:3030
+      # Stanford CoreNLP API for named entity recognition
+      corenlp:
+        image: docker.pkg.github.com/britishgeologicalsurvey/geo-ner-model/corenlp:v0.3
+        credentials:
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        ports:
+          - 9000:9000

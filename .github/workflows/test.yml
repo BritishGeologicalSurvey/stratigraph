@@ -5,17 +5,6 @@ jobs:
   test:
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
-
-    # Service containers to run - tests require CoreNLP
-    services:
-      corenlp:
-        image: docker.pkg.github.com/britishgeologicalsurvey/geo-ner-model/corenlp:v0.3
-        credentials:
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-        ports:
-          - 9000:9000
-
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
