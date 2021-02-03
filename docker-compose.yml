@@ -18,5 +18,5 @@ services:
     environment:
       - ENDPOINT=http://fuseki:3030/stratigraph/query
     ports:
-      - 80:80
+      - 8000:80
 
