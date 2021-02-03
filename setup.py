@@ -1,13 +1,11 @@
 import setuptools
-import versioneer
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="stratigraph",
-    version=versioneer.get_version(),
-    cmdclass=versioneer.get_cmdclass(),
+    version="0.1",
     author="BGS Geosemantics",
     author_email="enquiries+geosemantics@bgs.ac.uk",
     description="Query and visualise network stratigraphy",

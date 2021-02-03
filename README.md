@@ -16,13 +16,6 @@ See the instructions in that project for [Running CoreNLP in docker](https://git
 
 ## Running the application
 
-Kill any existing containers using port 80 or 3030 
-
-```
-docker container ls
-docker rm -f <container-name>
-```
-
 ```
 docker-compose up -d
 ```
@@ -39,7 +32,7 @@ pip install -r requirements.txt
 python integration/fuseki_load.py
 ```
 
-The intention is to improve the distribution so that Fuseki loads the whole Lexicon graph on startup, with the ability to reproduce the dataset from scratch using the [custom CoreNLP server container](https://github.com/BritishGeologicalSurvey/geo-ner-model#running-in-docker) as above.
+The ideal is to improve the distribution so that Fuseki loads the whole Lexicon graph on startup, with the ability to reproduce the dataset from scratch using the [custom CoreNLP server container](https://github.com/BritishGeologicalSurvey/geo-ner-model#running-in-docker) as above.
 
 
 ## Licence
