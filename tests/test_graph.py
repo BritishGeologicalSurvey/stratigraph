@@ -4,7 +4,7 @@ import networkx as nx
 import networkx.algorithms.isomorphism as iso
 from networkx.classes.function import is_empty
 from stratigraph.graph import triples, bounds_texts, ttl_to_nx, \
-     graph_to_dot, link_entities, bounds_links
+     graph_to_dot
 
 
 def test_triples():
@@ -21,20 +21,6 @@ def test_bounds_texts():
     texts = bounds_texts(mmg)
     print(texts)
     assert(texts[0]['upper'])
-
-
-def test_link_entities():
-    text = 'A sentence that contains a Patrick Burn Formation named entity'
-    link_list = link_entities(text)
-    assert isinstance(link_list, list)
-    assert 'url' in link_list[0]
-
-
-def test_bounds_links():
-    pkb = 'http://data.bgs.ac.uk/id/Lexicon/NamedRockUnit/PKB'
-    texts = bounds_texts(pkb)
-    g = bounds_links(pkb, texts)
-    assert isinstance(g, rdflib.Graph)
 
 
 def test_ttl_to_nx_empty():
