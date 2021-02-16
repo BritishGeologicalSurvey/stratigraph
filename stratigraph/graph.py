@@ -221,7 +221,11 @@ def ttl_to_nx(graph=None,
         # Not all Lexicon codes have DigMap colours, however - default to pale
         # grey
         colour = colours.get(str(url), '#EEEEEE')
-        gdot.add_node(label, url=str(url), style='filled', fillcolor=colour)
+        gdot.add_node(label,
+                      id=str(url),
+                      url=str(url),
+                      style='filled',
+                      fillcolor=colour)
 
         for strat in uppers:
             # don't add self-referential edges
