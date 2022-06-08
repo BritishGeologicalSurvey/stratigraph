@@ -14,7 +14,7 @@ class MockGraph(MagicMock):
     def graph_by_era(*args, **kwargs):
         graph = rdflib.Graph()
         dummy = os.path.join(os.path.dirname(__file__),
-                             '../data/jurassic_tm.ttl')
+                             '../../data/jurassic_tm.ttl')
         graph.parse(dummy, format='ttl')
         return graph
 
