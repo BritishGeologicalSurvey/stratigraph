@@ -16,4 +16,4 @@ jobs:
           pip3 install pytest flake8
           export PYTHONPATH=.:..
           python3 -m flake8 stratigraph tests scripts
-          python3 -m pytest -vs tests
+          python3 -m pytest -vs tests/unit
