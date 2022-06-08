@@ -204,14 +204,14 @@ def ttl_to_nx(graph=None,
     subjects = set([url for url in graph.subjects()])
 
     for url in subjects:
-        label = str(graph.label(url))
+        label = str(graph.value(url, RDFS.label))
         if not label:
             continue
 
         # Node attributes should be added when calling add_node
 
-        uppers = [str(graph.label(t[2])) for t in graph.triples([url, LEX_EXT['upper'], None])]  # noqa: E501
-        lowers = [str(graph.label(t[2])) for t in graph.triples([url, LEX_EXT['lower'], None])]  # noqa: E501
+        uppers = [str(graph.value(t[2], RDFS.label)) for t in graph.triples([url, LEX_EXT['upper'], None])]  # noqa: E501
+        lowers = [str(graph.value(t[2], RDFS.label)) for t in graph.triples([url, LEX_EXT['lower'], None])]  # noqa: E501
 
         # If orphan_nodes is False, only add node if we have edges.
         if (not uppers and not lowers) and not orphan_nodes:
