@@ -34,7 +34,8 @@ STOP_WORDS = [
 EDIT_DIST_CUT = 0.89  # cutoff for Levenshtein similarity set by @ike
 
 # Slow
-# LEXICON_TRIPLES = "https://raw.githubusercontent.com/BritishGeologicalSurvey/vocabularies/main/vocabularies/lexicon-named-rock-unit.nt"  # noqa: E501
+# LEXICON_TRIPLES = ("https://raw.githubusercontent.com/BritishGeologicalSurvey/vocabularies/"
+#                    "main/vocabularies/lexicon-named-rock-unit.nt")
 
 ENDPOINT = "https://data.bgs.ac.uk/vocprez/endpoint"
 

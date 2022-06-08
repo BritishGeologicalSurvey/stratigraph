@@ -1,7 +1,10 @@
-"""Collect RDF namespaces.
+"""
+Collect RDF namespaces.
 Look at how we could improve this with namespace_manager;
 But it requires an rdflib.Graph which we don't always have.
-https://rdflib.readthedocs.io/en/stable/namespaces_and_bindings.html"""  # noqa: E501
+https://rdflib.readthedocs.io/en/stable/namespaces_and_bindings.html
+"""
+
 
 from rdflib import Namespace
 

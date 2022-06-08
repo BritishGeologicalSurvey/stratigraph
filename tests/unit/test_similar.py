@@ -20,7 +20,7 @@ def test_stopped():
 
 
 def test_surplus():
-    obsolete = 'Keuper Marl And Sandstone [Obsolete Name And Code: Use MMG And SSG]'  # noqa: E501
+    obsolete = 'Keuper Marl And Sandstone [Obsolete Name And Code: Use MMG And SSG]'
     extra = 'Cumbrian Coast Group ( St Bees Evaporites'
     annotated = 'Aegiranum ( Skelton ) Marine Band'
     dashspace = 'Allt - y - Clych Conglomerate'
