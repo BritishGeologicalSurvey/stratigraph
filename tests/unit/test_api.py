@@ -1,6 +1,9 @@
 import os
 from unittest.mock import MagicMock
+
+import pytest
 import rdflib
+
 from fastapi.testclient import TestClient
 from stratigraph.api import app, load_graph
 
@@ -31,6 +34,7 @@ def test_lex():
     assert 'digraph' in str(response.content)
 
 
+@pytest.mark.xfail(reason='pydot issue: https://github.com/pydot/pydot/issues/258')
 def test_era():
     name = 'Carboniferous'
     response = client.get(f"/stratigraph/era/{name}")
