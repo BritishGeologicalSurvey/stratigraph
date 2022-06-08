@@ -210,8 +210,8 @@ def ttl_to_nx(graph=None,
 
         # Node attributes should be added when calling add_node
 
-        uppers = [str(graph.value(t[2], RDFS.label)) for t in graph.triples([url, LEX_EXT['upper'], None])]  # noqa: E501
-        lowers = [str(graph.value(t[2], RDFS.label)) for t in graph.triples([url, LEX_EXT['lower'], None])]  # noqa: E501
+        uppers = [str(graph.value(t[2], RDFS.label)) for t in graph.triples([url, LEX_EXT['upper'], None])]
+        lowers = [str(graph.value(t[2], RDFS.label)) for t in graph.triples([url, LEX_EXT['lower'], None])]
 
         # If orphan_nodes is False, only add node if we have edges.
         if (not uppers and not lowers) and not orphan_nodes:

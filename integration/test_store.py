@@ -12,11 +12,11 @@ def test_graph_by_era():
 
     era_uri = str(GEOCHRON.J)
     graph = g.graph_by_era(era_uri)
-    formation_labels = [str(graph.value(s, RDFS.label)) for s in graph.subjects()]  # noqa: E501
+    formation_labels = [str(graph.value(s, RDFS.label)) for s in graph.subjects()]
     assert 'Kimmeridge Clay Formation' in formation_labels
 
     graph = g.graph_by_era(era_uri, full=True)
-    all_labels = [str(graph.value(s, RDFS.label)) for s in graph.subjects()]  # noqa: E501
+    all_labels = [str(graph.value(s, RDFS.label)) for s in graph.subjects()]
 
     # There should be fewer labels in the formation list than the all list
     assert len(all_labels) > len(formation_labels)
@@ -25,7 +25,7 @@ def test_graph_by_era():
 def test_graph_from_code():
     g = GraphStore()
     graph = g.graph_all()
-    formation_labels = [str(graph.value(s, RDFS.label)) for s in graph.subjects()]  # noqa: E501
+    formation_labels = [str(graph.value(s, RDFS.label)) for s in graph.subjects()]
     assert 'Rannoch Formation' in formation_labels
 
     # TODO implement node distance and check that graph grows

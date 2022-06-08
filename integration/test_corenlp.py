@@ -4,9 +4,16 @@ from requests.exceptions import ConnectionError
 
 from stratigraph.corenlp import entities, tokens
 
-SAMPLE = """The data we provide includes field contect photographs of the sites and the samples that were taken, photographic logs of the drilled rock cores annotated with details of the parts that have been sampled, together with detailed geochemical analyses including XRF, XRD and ICP-MS analyses of acid dissolved samples. The 5 localities are sites where there are published records of fossil plants and paleosols. Late Silurian deposit at Bloomsburg, Pennsylvania; Lower Devonian deposit at Gaspe Bay Quebec; Miiddle Devonian forest at Cairo Quarry New York State; slightly later middle Devonian forest at Gilboa, New York; and late Devonian site at Red Hill Hyner, Pennsylvania.""" # noqa E501
+SAMPLE = ("The data we provide includes field contect photographs of the sites and the samples that were taken, "
+          "photographic logs of the drilled rock cores annotated with details of the parts that have been sampled, "
+          "together with detailed geochemical analyses including XRF, XRD and ICP-MS analyses of acid dissolved "
+          "samples. The 5 localities are sites where there are published records of fossil plants and paleosols. "
+          "Late Silurian deposit at Bloomsburg, Pennsylvania; Lower Devonian deposit at Gaspe Bay Quebec; "
+          "Miiddle Devonian forest at Cairo Quarry New York State; slightly later middle Devonian forest at Gilboa, "
+          "New York; and late Devonian site at Red Hill Hyner, Pennsylvania.")
 
-DEBUG_SAMPLE = "Bibliographic reference: Green, D.W. 1992. Bristol and Gloucester region. British Regional Geology. London: HMSO, 1992." # noqa E501
+DEBUG_SAMPLE = ("Bibliographic reference: Green, D.W. 1992. Bristol and Gloucester region. "
+                "British Regional Geology. London: HMSO, 1992.")
 
 
 @patch("stratigraph.corenlp.SERVER", "http://localhost:1234")

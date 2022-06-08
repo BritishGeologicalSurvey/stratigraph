@@ -6,3 +6,4 @@ python-Levenshtein
 rdflib
 terminusdb-client
 SPARQLWrapper
+flake8
