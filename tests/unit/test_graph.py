@@ -1,10 +1,12 @@
 import os
+
+import pytest
 import rdflib
 import networkx as nx
 import networkx.algorithms.isomorphism as iso
 from networkx.classes.function import is_empty
-from stratigraph.graph import triples, bounds_texts, ttl_to_nx, \
-     graph_to_dot
+
+from stratigraph.graph import triples, bounds_texts, ttl_to_nx, graph_to_dot
 
 
 def test_triples():
@@ -64,6 +66,7 @@ def test_ttl_to_nx():
     assert not nx.is_isomorphic(nx_graph_digmap, nx_graph_age, node_match=nm)
 
 
+@pytest.mark.xfail(reason='pydot issue: https://github.com/pydot/pydot/issues/258')
 def test_graph_to_dot():
     triples = os.path.join(os.path.dirname(__file__),
                            'fixtures',

@@ -73,7 +73,7 @@ def add_sparql_data():
 
     results = sparql.query().convert()
 
-    data = results.serialize(format='nt')
+    data = results.serialize(format='nt').encode('utf-8')
 
     status = requests.put(
         urljoin(FUSEKI_HOST, f'{DBNAME}/data?default'),

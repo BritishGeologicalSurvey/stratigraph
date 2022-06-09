@@ -57,17 +57,17 @@ class GraphStore():
 
         # age_overlaps_filter provided here but not used yet
         # TODO may want to switch between contains & overlaps?
-        age_overlaps_filter = """
-            FILTER ((( xsd:double(?eraMaxAge) >  xsd:double(?minAge)
-                     &&  xsd:double(?minAge) >  xsd:double(?eraMinAge)
-                     )
-                    ||
-                    ( xsd:double(?eraMinAge) <  xsd:double(?maxAge)
-                      ||  xsd:double(?maxAge) < xsd:double(?eraMaxAge))
-                    )
-                    && ?era = <{0}>
-            )
-            """.format(era_uri)  # noqa: F841 E501
+        # age_overlaps_filter = """
+        #     FILTER ((( xsd:double(?eraMaxAge) >  xsd:double(?minAge)
+        #              &&  xsd:double(?minAge) >  xsd:double(?eraMinAge)
+        #              )
+        #             ||
+        #             ( xsd:double(?eraMinAge) <  xsd:double(?maxAge)
+        #               ||  xsd:double(?maxAge) < xsd:double(?eraMaxAge))
+        #             )
+        #             && ?era = <{0}>
+        #     )
+        #     """.format(era_uri)
         formations_filter = """
             FILTER (?rank= rock:F)
             """

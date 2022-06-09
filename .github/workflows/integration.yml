@@ -13,7 +13,7 @@ jobs:
         run: |
           pip3 install requests SPARQLWrapper
           export FUSEKI_HOST=http://localhost:3030/
-          python3 integration/fuseki_load.py
+          python3 tests/integration/fuseki_load.py
 
       - name: run the integration tests
         run: |
@@ -23,7 +23,7 @@ jobs:
           export ENDPOINT=http://localhost:3030/stratigraph/query
           # Run the test server - better to rewrite the tests?
           export PYTHONPATH=.:..
-          python3 -m pytest -vs integration
+          python3 -m pytest -vs tests/integration
 
     # Service containers to run with `container-job`
     services:
